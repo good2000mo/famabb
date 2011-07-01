@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 01, 2011, 10:35 AM
+-- 建立日期: Jul 01, 2011, 12:16 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -295,7 +295,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1309487661, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1309493742, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -389,6 +389,10 @@ CREATE TABLE `fbb_search_cache` (
 -- 列出以下資料庫的數據： `fbb_search_cache`
 -- 
 
+INSERT INTO `fbb_search_cache` VALUES (1863347802, '127.0.0.1', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:11:"show_recent";}}');
+INSERT INTO `fbb_search_cache` VALUES (1119144017, '127.0.0.1', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:15:"show_unanswered";}}');
+INSERT INTO `fbb_search_cache` VALUES (1410867307, '127.0.0.1', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:11:"show_recent";}}');
+INSERT INTO `fbb_search_cache` VALUES (966617717, '127.0.0.1', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:4:{i:0;s:8:"keywords";i:1;s:3:"示";i:2;i:-1;i:3;s:3:"all";}}');
 
 -- --------------------------------------------------------
 
@@ -461,7 +465,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 1, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 4, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -538,4 +542,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309487645, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309493725, NULL, NULL, NULL);

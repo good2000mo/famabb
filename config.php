@@ -17,3 +17,6 @@ $cookie_seed = '90d190928809ff61';
 $base_url = 'http://127.0.0.1/xman2/famabb';
 
 define('PUN', 1);
+
+define('PUN_DEBUG', 1);
+define('PUN_SHOW_QUERIES', 1);
