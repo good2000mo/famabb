@@ -206,59 +206,6 @@ if (!empty($forum_actions))
 }
 
 ?>
-<div id="brdstats" class="block">
-	<h2><span><?php echo $lang_index['Board info'] ?></span></h2>
-	<div class="box">
-		<div class="inbox">
-			<dl class="conr">
-				<dt><strong><?php echo $lang_index['Board stats'] ?></strong></dt>
-				<dd><span><?php printf($lang_index['No of users'], '<strong>'.forum_number_format($stats['total_users']).'</strong>') ?></span></dd>
-				<dd><span><?php printf($lang_index['No of topics'], '<strong>'.forum_number_format($stats['total_topics']).'</strong>') ?></span></dd>
-				<dd><span><?php printf($lang_index['No of posts'], '<strong>'.forum_number_format($stats['total_posts']).'</strong>') ?></span></dd>
-			</dl>
-			<dl class="conl">
-				<dt><strong><?php echo $lang_index['User info'] ?></strong></dt>
-				<dd><span><?php printf($lang_index['Newest user'], $stats['newest_user']) ?></span></dd>
-<?php
-
-if ($pun_config['o_users_online'] == '1')
-{
-	// Fetch users online info and generate strings for output
-	$num_guests = 0;
-	$users = array();
-	$result = $db->query('SELECT user_id, ident FROM '.$db->prefix.'online WHERE idle=0 ORDER BY ident', true) or error('Unable to fetch online list', __FILE__, __LINE__, $db->error());
-
-	while ($pun_user_online = $db->fetch_assoc($result))
-	{
-		if ($pun_user_online['user_id'] > 1)
-		{
-			if ($pun_user['g_view_users'] == '1')
-				$users[] = "\n\t\t\t\t".'<dd><a href="profile.php?id='.$pun_user_online['user_id'].'">'.pun_htmlspecialchars($pun_user_online['ident']).'</a>';
-			else
-				$users[] = "\n\t\t\t\t".'<dd>'.pun_htmlspecialchars($pun_user_online['ident']);
-		}
-		else
-			++$num_guests;
-	}
-
-	$num_users = count($users);
-	echo "\t\t\t\t".'<dd><span>'.sprintf($lang_index['Users online'], '<strong>'.forum_number_format($num_users).'</strong>').'</span></dd>'."\n\t\t\t\t".'<dd><span>'.sprintf($lang_index['Guests online'], '<strong>'.forum_number_format($num_guests).'</strong>').'</span></dd>'."\n\t\t\t".'</dl>'."\n";
-
-
-	if ($num_users > 0)
-		echo "\t\t\t".'<dl id="onlinelist" class="clearb">'."\n\t\t\t\t".'<dt><strong>'.$lang_index['Online'].' </strong></dt>'."\t\t\t\t".implode(',</dd> ', $users).'</dd>'."\n\t\t\t".'</dl>'."\n";
-	else
-		echo "\t\t\t".'<div class="clearer"></div>'."\n";
-
-}
-else
-	echo "\t\t\t".'</dl>'."\n\t\t\t".'<div class="clearer"></div>'."\n";
-
-
-?>
-		</div>
-	</div>
-</div>
 <?php
 
 $footer_style = 'index';
