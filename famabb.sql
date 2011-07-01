@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 01, 2011, 10:01 AM
+-- 建立日期: Jul 01, 2011, 10:15 AM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -135,7 +135,6 @@ INSERT INTO `fbb_config` VALUES ('o_avatars_width', '60');
 INSERT INTO `fbb_config` VALUES ('o_avatars_height', '60');
 INSERT INTO `fbb_config` VALUES ('o_avatars_size', '10240');
 INSERT INTO `fbb_config` VALUES ('o_search_all_forums', '1');
-INSERT INTO `fbb_config` VALUES ('o_base_url', 'http://127.0.0.1/xman2/famabb');
 INSERT INTO `fbb_config` VALUES ('o_admin_email', 'comus2010mo@hotmail.com');
 INSERT INTO `fbb_config` VALUES ('o_webmaster_email', 'comus2010mo@hotmail.com');
 INSERT INTO `fbb_config` VALUES ('o_forum_subscriptions', '1');
