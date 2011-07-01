@@ -57,7 +57,6 @@ if (isset($_POST['form_sent']))
 		'gzip'					=> $_POST['form']['gzip'] != '1' ? '0' : '1',
 		'search_all_forums'		=> $_POST['form']['search_all_forums'] != '1' ? '0' : '1',
 		'additional_navlinks'	=> pun_trim($_POST['form']['additional_navlinks']),
-		'feed_type'				=> intval($_POST['form']['feed_type']),
 		'feed_ttl'				=> intval($_POST['form']['feed_ttl']),
 		'report_method'			=> intval($_POST['form']['report_method']),
 		'mailing_list'			=> pun_trim($_POST['form']['mailing_list']),
@@ -171,9 +170,6 @@ if (isset($_POST['form_sent']))
 		$form['disp_posts_default'] = 3;
 	else if ($form['disp_posts_default'] > 75)
 		$form['disp_posts_default'] = 75;
-
-	if ($form['feed_type'] < 0 || $form['feed_type'] > 2)
-		message($lang_common['Bad request']);
 
 	if ($form['feed_ttl'] < 0)
 		message($lang_common['Bad request']);
@@ -557,13 +553,6 @@ generate_admin_menu('options');
 						<legend><?php echo $lang_admin_options['Feed subhead'] ?></legend>
 						<div class="infldset">
 							<table class="aligntop" cellspacing="0">
-								<tr>
-									<th scope="row"><?php echo $lang_admin_options['Default feed label'] ?></th>
-									<td>
-										<input type="radio" name="form[feed_type]" value="0"<?php if ($pun_config['o_feed_type'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['None'] ?></strong>&#160;&#160;&#160;<input type="radio" name="form[feed_type]" value="1"<?php if ($pun_config['o_feed_type'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['RSS'] ?></strong>&#160;&#160;&#160;<input type="radio" name="form[feed_type]" value="2"<?php if ($pun_config['o_feed_type'] == '2') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['Atom'] ?></strong>
-										<span><?php echo $lang_admin_options['Default feed help'] ?></span>
-									</td>
-								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Feed TTL label'] ?></th>
 									<td>
