@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 01, 2011, 10:15 AM
+-- 建立日期: Jul 01, 2011, 10:35 AM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -95,7 +95,7 @@ INSERT INTO `fbb_config` VALUES ('o_searchindex_revision', '2');
 INSERT INTO `fbb_config` VALUES ('o_parser_revision', '2');
 INSERT INTO `fbb_config` VALUES ('o_board_title', 'FamaBB');
 INSERT INTO `fbb_config` VALUES ('o_board_desc', '<p><span>Unfortunately no one can be told what FluxBB is - you have to see it for yourself.</span></p>');
-INSERT INTO `fbb_config` VALUES ('o_default_timezone', '0');
+INSERT INTO `fbb_config` VALUES ('o_default_timezone', '8');
 INSERT INTO `fbb_config` VALUES ('o_time_format', 'H:i:s');
 INSERT INTO `fbb_config` VALUES ('o_date_format', 'Y-m-d');
 INSERT INTO `fbb_config` VALUES ('o_timeout_visit', '1800');
@@ -109,7 +109,7 @@ INSERT INTO `fbb_config` VALUES ('o_smilies', '1');
 INSERT INTO `fbb_config` VALUES ('o_smilies_sig', '1');
 INSERT INTO `fbb_config` VALUES ('o_make_links', '1');
 INSERT INTO `fbb_config` VALUES ('o_default_lang', 'Traditional_Chinese');
-INSERT INTO `fbb_config` VALUES ('o_default_style', 'Air');
+INSERT INTO `fbb_config` VALUES ('o_default_style', 'Lithium');
 INSERT INTO `fbb_config` VALUES ('o_default_user_group', '4');
 INSERT INTO `fbb_config` VALUES ('o_topic_review', '15');
 INSERT INTO `fbb_config` VALUES ('o_disp_topics_default', '30');
@@ -296,7 +296,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1309485695, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1309487661, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -462,7 +462,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 0, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 1, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -539,4 +539,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'Traditional_Chinese', 'Air', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309485691, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309487645, NULL, NULL, NULL);
