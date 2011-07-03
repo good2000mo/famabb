@@ -226,53 +226,6 @@ $tpl_main = str_replace('<pun_navlinks>', $tpl_temp, $tpl_main);
 // END SUBST - <pun_navlinks>
 
 
-// START SUBST - <pun_status>
-$page_statusinfo = array();
-
-if ($pun_user['is_guest'])
-	$page_statusinfo = '<p>'.$lang_common['Not logged in'].'</p>';
-else
-{
-	$page_statusinfo[] = '<li><span>'.$lang_common['Logged in as'].' <strong>'.pun_htmlspecialchars($pun_user['username']).'</strong></span></li>';
-	$page_statusinfo[] = '<li><span>'.sprintf($lang_common['Last visit'], format_time($pun_user['last_visit'])).'</span></li>';
-
-	if ($pun_user['is_admmod'])
-	{
-		if ($pun_config['o_report_method'] == '0' || $pun_config['o_report_method'] == '2')
-		{
-			$result_header = $db->query('SELECT 1 FROM '.$db->prefix.'reports WHERE zapped IS NULL') or error('Unable to fetch reports info', __FILE__, __LINE__, $db->error());
-
-			if ($db->result($result_header))
-				$page_statusinfo[] = '<li class="reportlink"><span><strong><a href="admin_reports.php">'.$lang_common['New reports'].'</a></strong></span></li>';
-		}
-
-		if ($pun_config['o_maintenance'] == '1')
-			$page_statusinfo[] = '<li class="maintenancelink"><span><strong><a href="admin_options.php#maintenance">'.$lang_common['Maintenance mode enabled'].'</a></strong></span></li>';
-	}
-}
-
-
-// Generate all that jazz
-$tpl_temp = '<div id="brdwelcome" class="inbox">'."\n\t\t\t";
-
-// The status information
-if (is_array($page_statusinfo))
-{
-	$tpl_temp .= "\n\t\t\t".'<ul class="conl">';
-	$tpl_temp .= "\n\t\t\t\t".implode("\n\t\t\t\t", $page_statusinfo);
-	$tpl_temp .= "\n\t\t\t".'</ul>';
-}
-else
-	$tpl_temp .= "\n\t\t\t".$page_statusinfo;
-
-$tpl_temp .= "\n\t\t\t".'<div class="clearer"></div>';
-
-$tpl_temp .= "\n\t\t".'</div>';
-
-$tpl_main = str_replace('<pun_status>', $tpl_temp, $tpl_main);
-// END SUBST - <pun_status>
-
-
 // START SUBST - <pun_announcement>
 if ($pun_user['g_read_board'] == '1' && $pun_config['o_announcement'] == '1')
 {

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 02, 2011, 09:50 AM
+-- 建立日期: Jul 03, 2011, 08:57 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -94,7 +94,7 @@ INSERT INTO `fbb_config` VALUES ('o_database_revision', '11');
 INSERT INTO `fbb_config` VALUES ('o_searchindex_revision', '2');
 INSERT INTO `fbb_config` VALUES ('o_parser_revision', '2');
 INSERT INTO `fbb_config` VALUES ('o_board_title', 'FamaBB');
-INSERT INTO `fbb_config` VALUES ('o_board_desc', '<p><span>Unfortunately no one can be told what FluxBB is - you have to see it for yourself.</span></p>');
+INSERT INTO `fbb_config` VALUES ('o_board_desc', '<p><span>這是我們應該做的.</span></p>');
 INSERT INTO `fbb_config` VALUES ('o_default_timezone', '8');
 INSERT INTO `fbb_config` VALUES ('o_time_format', 'H:i:s');
 INSERT INTO `fbb_config` VALUES ('o_date_format', 'Y-m-d');
@@ -292,7 +292,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1309571209, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1309697700, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -390,6 +390,7 @@ INSERT INTO `fbb_search_cache` VALUES (556839556, 'admin', 'a:6:{s:10:"search_id
 INSERT INTO `fbb_search_cache` VALUES (2065566990, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:15:"show_unanswered";}}');
 INSERT INTO `fbb_search_cache` VALUES (536110657, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:11:"show_recent";}}');
 INSERT INTO `fbb_search_cache` VALUES (691929120, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:12:"show_replies";}}');
+INSERT INTO `fbb_search_cache` VALUES (2067376003, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:12:"show_replies";}}');
 
 -- --------------------------------------------------------
 
@@ -462,7 +463,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 7, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 10, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -539,4 +540,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309495183, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309696642, NULL, NULL, NULL);
