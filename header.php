@@ -227,7 +227,7 @@ $tpl_main = str_replace('<pun_navlinks>', $tpl_temp, $tpl_main);
 
 
 // START SUBST - <pun_status>
-$page_statusinfo = $page_topicsearches = array();
+$page_statusinfo = array();
 
 if ($pun_user['is_guest'])
 	$page_statusinfo = '<p>'.$lang_common['Not logged in'].'</p>';
@@ -249,19 +249,6 @@ else
 		if ($pun_config['o_maintenance'] == '1')
 			$page_statusinfo[] = '<li class="maintenancelink"><span><strong><a href="admin_options.php#maintenance">'.$lang_common['Maintenance mode enabled'].'</a></strong></span></li>';
 	}
-
-	if ($pun_user['g_read_board'] == '1' && $pun_user['g_search'] == '1')
-	{
-		$page_topicsearches[] = '<a href="search.php?action=show_replies" title="'.$lang_common['Show posted topics'].'">'.$lang_common['Posted topics'].'</a>';
-		$page_topicsearches[] = '<a href="search.php?action=show_new" title="'.$lang_common['Show new posts'].'">'.$lang_common['New posts header'].'</a>';
-	}
-}
-
-// Quick searches
-if ($pun_user['g_read_board'] == '1' && $pun_user['g_search'] == '1')
-{
-	$page_topicsearches[] = '<a href="search.php?action=show_recent" title="'.$lang_common['Show active topics'].'">'.$lang_common['Active topics'].'</a>';
-	$page_topicsearches[] = '<a href="search.php?action=show_unanswered" title="'.$lang_common['Show unanswered topics'].'">'.$lang_common['Unanswered topics'].'</a>';
 }
 
 
@@ -278,13 +265,7 @@ if (is_array($page_statusinfo))
 else
 	$tpl_temp .= "\n\t\t\t".$page_statusinfo;
 
-// Generate quicklinks
-if (!empty($page_topicsearches))
-{
-	$tpl_temp .= "\n\t\t\t".'<ul class="conr">';
-	$tpl_temp .= "\n\t\t\t\t".'<li><span>'.$lang_common['Topic searches'].' '.implode(' | ', $page_topicsearches).'</span></li>';
-	$tpl_temp .= "\n\t\t\t".'</ul>'."\n\t\t\t".'<div class="clearer"></div>';
-}
+$tpl_temp .= "\n\t\t\t".'<div class="clearer"></div>';
 
 $tpl_temp .= "\n\t\t".'</div>';
 
