@@ -250,26 +250,22 @@ if ($db->num_rows($result))
 }
 else
 {
-	$colspan = ($pun_config['o_topic_views'] == '1') ? 4 : 3;
 
 ?>
-				<tr class="rowodd inone">
-					<td class="tcl" colspan="<?php echo $colspan ?>">
-						<div class="icon inone"><div class="nosize"><!-- --></div></div>
-						<div class="tclcon">
-							<div>
-								<strong><?php echo $lang_forum['Empty forum'] ?></strong>
-							</div>
+				<li class="rowodd inone">
+					<div class="icon inone"><div class="nosize"><!-- --></div></div>
+					<div class="tclcon">
+						<div>
+							<strong><?php echo $lang_forum['Empty forum'] ?></strong>
 						</div>
-					</td>
-				</tr>
+					</div>
+				</li>
 <?php
 
 }
 
 ?>
-			</tbody>
-			</table>
+			</ul>
 		</div>
 	</div>
 </div>
