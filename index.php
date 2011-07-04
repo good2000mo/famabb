@@ -53,7 +53,7 @@ while ($cur_forum = $db->fetch_assoc($result))
 	if ($cur_forum['cid'] != $cur_category) // A new category since last iteration?
 	{
 		if ($cur_category != 0)
-			echo "\t\t\t".'</tbody>'."\n\t\t\t".'</table>'."\n\t\t".'</div>'."\n\t".'</div>'."\n".'</div>'."\n\n";
+			echo "\n\t\t\t".'</ul>'."\n\t\t".'</div>'."\n\t".'</div>'."\n".'</div>'."\n\n";
 
 		++$cat_count;
 		$forum_count = 0;
@@ -63,16 +63,7 @@ while ($cur_forum = $db->fetch_assoc($result))
 	<h2><span><?php echo pun_htmlspecialchars($cur_forum['cat_name']) ?></span></h2>
 	<div class="box">
 		<div class="inbox">
-			<table cellspacing="0">
-			<thead>
-				<tr>
-					<th class="tcl" scope="col"><?php echo $lang_common['Forum'] ?></th>
-					<th class="tc2" scope="col"><?php echo $lang_index['Topics'] ?></th>
-					<th class="tc3" scope="col"><?php echo $lang_common['Posts'] ?></th>
-					<th class="tcr" scope="col"><?php echo $lang_common['Last post'] ?></th>
-				</tr>
-			</thead>
-			<tbody>
+			<ul>
 <?php
 
 		$cur_category = $cur_forum['cid'];
@@ -104,27 +95,16 @@ while ($cur_forum = $db->fetch_assoc($result))
 	if ($cur_forum['redirect_url'] != '')
 	{
 		$forum_field = '<h3><span class="redirtext">'.$lang_index['Link to'].'</span> <a href="'.pun_htmlspecialchars($cur_forum['redirect_url']).'" title="'.$lang_index['Link to'].' '.pun_htmlspecialchars($cur_forum['redirect_url']).'">'.pun_htmlspecialchars($cur_forum['forum_name']).'</a></h3>';
-		$num_topics = $num_posts = '-';
 		$item_status .= ' iredirect';
 		$icon_type = 'icon';
 	}
 	else
 	{
 		$forum_field = '<h3><a href="viewforum.php?id='.$cur_forum['fid'].'">'.pun_htmlspecialchars($cur_forum['forum_name']).'</a>'.(!empty($forum_field_new) ? ' '.$forum_field_new : '').'</h3>';
-		$num_topics = $cur_forum['num_topics'];
-		$num_posts = $cur_forum['num_posts'];
 	}
 
 	if ($cur_forum['forum_desc'] != '')
 		$forum_field .= "\n\t\t\t\t\t\t\t\t".'<div class="forumdesc">'.$cur_forum['forum_desc'].'</div>';
-
-	// If there is a last_post/last_poster
-	if ($cur_forum['last_post'] != '')
-		$last_post = '<a href="viewtopic.php?pid='.$cur_forum['last_post_id'].'#p'.$cur_forum['last_post_id'].'">'.format_time($cur_forum['last_post']).'</a> <span class="byuser">'.$lang_common['by'].' '.pun_htmlspecialchars($cur_forum['last_poster']).'</span>';
-	else if ($cur_forum['redirect_url'] != '')
-		$last_post = '- - -';
-	else
-		$last_post = $lang_common['Never'];
 
 	if ($cur_forum['moderators'] != '')
 	{
@@ -143,19 +123,14 @@ while ($cur_forum = $db->fetch_assoc($result))
 	}
 
 ?>
-				<tr class="<?php echo $item_status ?>">
-					<td class="tcl">
-						<div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo forum_number_format($forum_count) ?></div></div>
-						<div class="tclcon">
-							<div>
-								<?php echo $forum_field."\n".$moderators ?>
-							</div>
+				<li class="<?php echo $item_status ?>">
+					<div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo forum_number_format($forum_count) ?></div></div>
+					<div class="tclcon">
+						<div>
+							<?php echo $forum_field."\n".$moderators ?>
 						</div>
-					</td>
-					<td class="tc2"><?php echo forum_number_format($num_topics) ?></td>
-					<td class="tc3"><?php echo forum_number_format($num_posts) ?></td>
-					<td class="tcr"><?php echo $last_post ?></td>
-				</tr>
+					</div>
+				</li>
 <?php
 
 }
