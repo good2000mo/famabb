@@ -298,7 +298,7 @@ if (isset($_GET['tid']))
 	<div class="inbox crumbsplus">
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_topic['forum_name']) ?></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_topic['forum_name']) ?></a></li>
 			<li><span>»&#160;</span><a href="viewtopic.php?id=<?php echo $tid ?>"><?php echo pun_htmlspecialchars($cur_topic['subject']) ?></a></li>
 			<li><span>»&#160;</span><strong><?php echo $lang_misc['Moderate'] ?></strong></li>
 		</ul>
@@ -399,7 +399,7 @@ if (isset($_GET['tid']))
 		</div>
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_topic['forum_name']) ?></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_topic['forum_name']) ?></a></li>
 			<li><span>»&#160;</span><a href="viewtopic.php?id=<?php echo $tid ?>"><?php echo pun_htmlspecialchars($cur_topic['subject']) ?></a></li>
 			<li><span>»&#160;</span><strong><?php echo $lang_misc['Moderate'] ?></strong></li>
 		</ul>
@@ -463,7 +463,7 @@ if (isset($_REQUEST['move_topics']) || isset($_POST['move_topics_to']))
 		update_forum($move_to_forum); // Update the forum TO which the topic was moved
 
 		$redirect_msg = (count($topics) > 1) ? $lang_misc['Move topics redirect'] : $lang_misc['Move topic redirect'];
-		redirect('viewforum.php?id='.$move_to_forum, $redirect_msg);
+		redirect('viewboard.php?id='.$move_to_forum, $redirect_msg);
 	}
 
 	if (isset($_POST['move_topics']))
@@ -597,7 +597,7 @@ else if (isset($_POST['merge_topics']) || isset($_POST['merge_topics_comply']))
 
 		// Update the forum FROM which the topic was moved and redirect
 		update_forum($fid);
-		redirect('viewforum.php?id='.$fid, $lang_misc['Merge topics redirect']);
+		redirect('viewboard.php?id='.$fid, $lang_misc['Merge topics redirect']);
 	}
 
 	$topics = isset($_POST['topics']) ? $_POST['topics'] : array();
@@ -677,7 +677,7 @@ else if (isset($_POST['delete_topics']) || isset($_POST['delete_topics_comply'])
 
 		update_forum($fid);
 
-		redirect('viewforum.php?id='.$fid, $lang_misc['Delete topics redirect']);
+		redirect('viewboard.php?id='.$fid, $lang_misc['Delete topics redirect']);
 	}
 
 
@@ -777,7 +777,7 @@ else if (isset($_GET['unstick']))
 
 // No specific forum moderation action was specified in the query string, so we'll display the moderator forum
 
-// Load the viewforum.php language file
+// Load the viewboard.php language file
 require PUN_ROOT.'lang/'.$pun_user['language'].'/forum.php';
 
 // Fetch some info about the forum
@@ -825,7 +825,7 @@ require PUN_ROOT.'header.php';
 	<div class="inbox crumbsplus">
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></a></li>
 			<li><span>»&#160;</span><strong><?php echo $lang_misc['Moderate'] ?></strong></li>
 		</ul>
 		<div class="pagepost">
@@ -981,7 +981,7 @@ else
 		</div>
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $fid ?>"><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></a></li>
 			<li><span>»&#160;</span><strong><?php echo $lang_misc['Moderate'] ?></strong></li>
 		</ul>
 		<div class="clearer"></div>

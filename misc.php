@@ -74,7 +74,7 @@ else if ($action == 'markforumread')
 	$tracked_topics['forums'][$fid] = time();
 	set_tracked_topics($tracked_topics);
 
-	redirect('viewforum.php?id='.$fid, $lang_misc['Mark forum read redirect']);
+	redirect('viewboard.php?id='.$fid, $lang_misc['Mark forum read redirect']);
 }
 
 
@@ -274,7 +274,7 @@ else if (isset($_GET['report']))
 	<div class="inbox">
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $cur_post['fid'] ?>"><?php echo pun_htmlspecialchars($cur_post['forum_name']) ?></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $cur_post['fid'] ?>"><?php echo pun_htmlspecialchars($cur_post['forum_name']) ?></a></li>
 			<li><span>»&#160;</span><a href="viewtopic.php?pid=<?php echo $post_id ?>#p<?php echo $post_id ?>"><?php echo pun_htmlspecialchars($cur_post['subject']) ?></a></li>
 			<li><span>»&#160;</span><strong><?php echo $lang_misc['Report post'] ?></strong></li>
 		</ul>
@@ -349,7 +349,7 @@ else if ($action == 'subscribe')
 
 		$db->query('INSERT INTO '.$db->prefix.'forum_subscriptions (user_id, forum_id) VALUES('.$pun_user['id'].' ,'.$forum_id.')') or error('Unable to add subscription', __FILE__, __LINE__, $db->error());
 
-		redirect('viewforum.php?id='.$forum_id, $lang_misc['Subscribe redirect']);
+		redirect('viewboard.php?id='.$forum_id, $lang_misc['Subscribe redirect']);
 	}
 }
 
@@ -389,7 +389,7 @@ else if ($action == 'unsubscribe')
 
 		$db->query('DELETE FROM '.$db->prefix.'forum_subscriptions WHERE user_id='.$pun_user['id'].' AND forum_id='.$forum_id) or error('Unable to remove subscription', __FILE__, __LINE__, $db->error());
 
-		redirect('viewforum.php?id='.$forum_id, $lang_misc['Unsubscribe redirect']);
+		redirect('viewboard.php?id='.$forum_id, $lang_misc['Unsubscribe redirect']);
 	}
 }
 

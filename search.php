@@ -603,7 +603,7 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 
 		foreach ($search_set as $cur_search)
 		{
-			$forum = '<a href="viewforum.php?id='.$cur_search['forum_id'].'">'.pun_htmlspecialchars($cur_search['forum_name']).'</a>';
+			$forum = '<a href="viewboard.php?id='.$cur_search['forum_id'].'">'.pun_htmlspecialchars($cur_search['forum_name']).'</a>';
 
 			if ($pun_config['o_censoring'] == '1')
 				$cur_search['subject'] = censor_words($cur_search['subject']);

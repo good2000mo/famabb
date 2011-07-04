@@ -1,6 +1,6 @@
 <?php
 
-// Language definitions used in viewforum.php
+// Language definitions used in viewboard.php
 $lang_forum = array(
 
 'Post topic'	=>	'發表主題',

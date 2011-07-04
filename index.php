@@ -100,7 +100,7 @@ while ($cur_forum = $db->fetch_assoc($result))
 	}
 	else
 	{
-		$forum_field = '<h3><a href="viewforum.php?id='.$cur_forum['fid'].'">'.pun_htmlspecialchars($cur_forum['forum_name']).'</a>'.(!empty($forum_field_new) ? ' '.$forum_field_new : '').'</h3>';
+		$forum_field = '<h3><a href="viewboard.php?id='.$cur_forum['fid'].'">'.pun_htmlspecialchars($cur_forum['forum_name']).'</a>'.(!empty($forum_field_new) ? ' '.$forum_field_new : '').'</h3>';
 	}
 
 	if ($cur_forum['forum_desc'] != '')

@@ -18,7 +18,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id < 1)
 	message($lang_common['Bad request']);
 
-// Load the viewforum.php language file
+// Load the viewboard.php language file
 require PUN_ROOT.'lang/'.$pun_user['language'].'/forum.php';
 
 // Fetch some info about the forum
@@ -76,7 +76,7 @@ $p = (!isset($_GET['p']) || $_GET['p'] <= 1 || $_GET['p'] > $num_pages) ? 1 : in
 $start_from = $pun_user['disp_topics'] * ($p - 1);
 
 // Generate paging links
-$paging_links = '<span class="pages-label">'.$lang_common['Pages'].' </span>'.paginate($num_pages, $p, 'viewforum.php?id='.$id);
+$paging_links = '<span class="pages-label">'.$lang_common['Pages'].' </span>'.paginate($num_pages, $p, 'viewboard.php?id='.$id);
 
 
 // Add relationship meta tags
@@ -87,13 +87,13 @@ if ($num_pages > 1)
 {
 	if ($p > 1)
 	{
-		$page_head['first'] = '<link rel="first" href="viewforum.php?id='.$id.'&amp;p=1" title="'.sprintf($lang_common['Page'], 1).'" />';
-		$page_head['prev'] = '<link rel="prev" href="viewforum.php?id='.$id.'&amp;p='.($p-1).'" title="'.sprintf($lang_common['Page'], $p-1).'" />';
+		$page_head['first'] = '<link rel="first" href="viewboard.php?id='.$id.'&amp;p=1" title="'.sprintf($lang_common['Page'], 1).'" />';
+		$page_head['prev'] = '<link rel="prev" href="viewboard.php?id='.$id.'&amp;p='.($p-1).'" title="'.sprintf($lang_common['Page'], $p-1).'" />';
 	}
 	if ($p < $num_pages)
 	{
-		$page_head['next'] = '<link rel="next" href="viewforum.php?id='.$id.'&amp;p='.($p+1).'" title="'.sprintf($lang_common['Page'], $p+1).'" />';
-		$page_head['last'] = '<link rel="last" href="viewforum.php?id='.$id.'&amp;p='.$num_pages.'" title="'.sprintf($lang_common['Page'], $num_pages).'" />';
+		$page_head['next'] = '<link rel="next" href="viewboard.php?id='.$id.'&amp;p='.($p+1).'" title="'.sprintf($lang_common['Page'], $p+1).'" />';
+		$page_head['last'] = '<link rel="last" href="viewboard.php?id='.$id.'&amp;p='.$num_pages.'" title="'.sprintf($lang_common['Page'], $num_pages).'" />';
 	}
 }
 
@@ -122,7 +122,7 @@ require PUN_ROOT.'header.php';
 	<div class="inbox crumbsplus">
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $id ?>"><strong><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></strong></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $id ?>"><strong><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></strong></a></li>
 		</ul>
 		<div class="pagepost">
 			<p class="pagelink conl"><?php echo $paging_links ?></p>
@@ -278,7 +278,7 @@ else
 		</div>
 		<ul class="crumbs">
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
-			<li><span>»&#160;</span><a href="viewforum.php?id=<?php echo $id ?>"><strong><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></strong></a></li>
+			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $id ?>"><strong><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></strong></a></li>
 		</ul>
 <?php echo (!empty($forum_actions) ? "\t\t".'<p class="subscribelink clearb">'.implode(' - ', $forum_actions).'</p>'."\n" : '') ?>
 		<div class="clearer"></div>
@@ -287,5 +287,5 @@ else
 <?php
 
 $forum_id = $id;
-$footer_style = 'viewforum';
+$footer_style = 'viewboard';
 require PUN_ROOT.'footer.php';
