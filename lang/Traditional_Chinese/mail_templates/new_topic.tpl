@@ -1,4 +1,4 @@
-標題: 論壇版塊 '<forum_name>' 的新主題
+標題: 公告板版塊 '<forum_name>' 的新主題
 
 <poster> 已經在您訂閱的版塊 '<forum_name>' 發表了一個新的主題 '<topic_subject>' 。
 
@@ -8,4 +8,4 @@
 
 --
 <board_mailer>
-（請勿回復該郵件）
+（請勿回覆該郵件）

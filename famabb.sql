@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 03, 2011, 08:57 PM
+-- 建立日期: Jul 04, 2011, 11:55 AM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -141,14 +141,14 @@ INSERT INTO `fbb_config` VALUES ('o_smtp_host', NULL);
 INSERT INTO `fbb_config` VALUES ('o_smtp_user', NULL);
 INSERT INTO `fbb_config` VALUES ('o_smtp_pass', NULL);
 INSERT INTO `fbb_config` VALUES ('o_smtp_ssl', '0');
-INSERT INTO `fbb_config` VALUES ('o_regs_allow', '1');
+INSERT INTO `fbb_config` VALUES ('o_regs_allow', '0');
 INSERT INTO `fbb_config` VALUES ('o_regs_verify', '0');
 INSERT INTO `fbb_config` VALUES ('o_announcement', '0');
 INSERT INTO `fbb_config` VALUES ('o_announcement_message', '在此填寫您要發佈的公告。');
 INSERT INTO `fbb_config` VALUES ('o_rules', '0');
-INSERT INTO `fbb_config` VALUES ('o_rules_message', '在此填寫論壇服務條款');
+INSERT INTO `fbb_config` VALUES ('o_rules_message', '在此填寫公告板服務條款');
 INSERT INTO `fbb_config` VALUES ('o_maintenance', '0');
-INSERT INTO `fbb_config` VALUES ('o_maintenance_message', '論壇維護中。請稍後訪問。');
+INSERT INTO `fbb_config` VALUES ('o_maintenance_message', '公告板維護中。請稍後訪問。');
 INSERT INTO `fbb_config` VALUES ('o_default_dst', '0');
 INSERT INTO `fbb_config` VALUES ('p_message_bbcode', '1');
 INSERT INTO `fbb_config` VALUES ('p_message_img_tag', '1');
@@ -292,7 +292,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1309697700, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1309750828, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -321,7 +321,7 @@ CREATE TABLE `fbb_posts` (
 -- 列出以下資料庫的數據： `fbb_posts`
 -- 
 
-INSERT INTO `fbb_posts` VALUES (1, 'admin', 2, '127.0.0.1', NULL, '如果您在閱讀這個帖子(我猜正是如此)，安裝的 FluxBB 已經開始工作！現在您可以登錄，並進入頂部的管理設置面板來配置您的論壇。', 0, 1309485691, NULL, NULL, 1);
+INSERT INTO `fbb_posts` VALUES (1, 'admin', 2, '127.0.0.1', NULL, '如果您在閱讀這個文章(我猜正是如此)，安裝的 FluxBB 已經開始工作！現在您可以登錄，並進入頂部的管理設置面板來配置您的論壇。', 0, 1309485691, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -391,6 +391,8 @@ INSERT INTO `fbb_search_cache` VALUES (2065566990, 'admin', 'a:6:{s:10:"search_i
 INSERT INTO `fbb_search_cache` VALUES (536110657, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:11:"show_recent";}}');
 INSERT INTO `fbb_search_cache` VALUES (691929120, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:12:"show_replies";}}');
 INSERT INTO `fbb_search_cache` VALUES (2067376003, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:2:{i:0;s:6:"action";i:1;s:12:"show_replies";}}');
+INSERT INTO `fbb_search_cache` VALUES (766126746, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:6:"topics";s:11:"search_type";a:3:{i:0;s:6:"action";i:1;s:16:"show_user_topics";i:2;i:2;}}');
+INSERT INTO `fbb_search_cache` VALUES (1744949209, 'admin', 'a:6:{s:10:"search_ids";s:18:"a:1:{i:0;s:1:"1";}";s:8:"num_hits";i:1;s:7:"sort_by";i:0;s:8:"sort_dir";s:4:"DESC";s:7:"show_as";s:5:"posts";s:11:"search_type";a:3:{i:0;s:6:"action";i:1;s:15:"show_user_posts";i:2;i:2;}}');
 
 -- --------------------------------------------------------
 
@@ -463,7 +465,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例帖子', 1309485691, 1, 1309485691, 1, 'admin', 10, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 22, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -540,4 +542,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309696642, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309748359, NULL, NULL, NULL);

@@ -13,9 +13,9 @@ $lang_common = array(
 
 // Notices
 'Bad request'						=>	'錯誤請求。您所打開的鏈接不存在或已失效。',
-'No view'							=>	'您沒有權限查看這些論壇。',
+'No view'							=>	'您沒有權限查看這些公告板。',
 'No permission'						=>	'您沒有權限訪問該頁面。',
-'Bad referrer'						=>	'HTTP_REFERER 錯誤。您從一個未經授權的地址接入本頁。如果該問題再次發生，請檢查設置 管理設置/配置選項 中的 \'根目錄網址\' 填寫是否正確，並確認您訪問論壇的鏈接正是指向該網址。要獲得關於此問題的更多信息請訪問FluxBB官方論壇。',
+'Bad referrer'						=>	'HTTP_REFERER 錯誤。您從一個未經授權的地址接入本頁。如果該問題再次發生，請檢查設置 管理設置/配置選項 中的 \'根目錄網址\' 填寫是否正確，並確認您訪問公告板的鏈接正是指向該網址。要獲得關於此問題的更多信息請訪問FluxBB官方公告板。',
 'No cookie'							=>	'您似乎已經登錄成功，但是cookie未能正確設置。請檢查您的相關設置，如果該功能可用，請對本站啟用cookies。',
 'Pun include error'					=>	'Unable to process user include %s from template %s. There is no such file in neither the template directory nor in the user include directory.',
 
@@ -23,10 +23,10 @@ $lang_common = array(
 'Announcement'						=>	'公告',
 'Options'							=>	'選項',
 'Submit'							=>	'提交', // "Name" of submit buttons
-'Ban message'						=>	'您的賬號已被論壇封禁。',
+'Ban message'						=>	'您的賬號已被公告板封禁。',
 'Ban message 2'						=>	'該封禁會持續至',
-'Ban message 3'						=>	'以下是論壇管理人員給您的封禁通知：',
-'Ban message 4'						=>	'任何疑問，請直接聯繫論壇管理員',
+'Ban message 3'						=>	'以下是公告板管理人員給您的封禁通知：',
+'Ban message 4'						=>	'任何疑問，請直接聯繫公告板管理員',
 'Never'								=>	'從未',
 'Today'								=>	'今天',
 'Yesterday'							=>	'昨天',
@@ -43,7 +43,7 @@ $lang_common = array(
 'Last post'							=>	'最後發表',
 'by'								=>	'by', // As in last post by someuser
 'New posts'							=>	'查看更新', // The link that leads to the first new post
-'New posts info'					=>	'查看該主題中新增的帖子。', // The popup text for new posts links
+'New posts info'					=>	'查看該主題中新增的文章。', // The popup text for new posts links
 'Username'							=>	'用戶名',
 'Password'							=>	'密碼',
 'Email'								=>	'電子信箱',
@@ -53,9 +53,9 @@ $lang_common = array(
 'Subject'							=>	'標題',
 'Message'							=>	'內容',
 'Topic'								=>	'主題',
-'Forum'								=>	'論壇',
-'Posts'								=>	'帖子',
-'Replies'							=>	'回復',
+'Forum'								=>	'公告板',
+'Posts'								=>	'文章',
+'Replies'							=>	'回覆',
 'Pages'								=>	'頁次：',
 'Page'								=>	'頁 %s',
 'BBCode'							=>	'BBCode：', // You probably shouldn't change this
@@ -69,7 +69,7 @@ $lang_common = array(
 'Write message legend'				=>	'填寫內容後點擊按鈕提交',
 'Previous'							=>	'上一頁',
 'Next'								=>	'下一頁',
-'Forum index'						=>	'論壇首頁',
+'Forum index'						=>	'公告板首頁',
 'Spacer'							=>	'…', // Ellipsis for paginate
 
 // Title
@@ -105,19 +105,19 @@ $lang_common = array(
 'Topic searches'					=>	'主題:',
 'New posts header'					=>	'已更新',
 'Active topics'						=>	'活躍中',
-'Unanswered topics'					=>	'無回復',
+'Unanswered topics'					=>	'無回覆',
 'Posted topics'						=>	'已參與',
-'Show new posts'					=>	'查看您上次登錄後出現的新帖子。',
-'Show active topics'				=>	'查看包含最近回復的主題。',
-'Show unanswered topics'			=>	'查看還未被回復過的主題。',
+'Show new posts'					=>	'查看您上次登錄後出現的新文章。',
+'Show active topics'				=>	'查看包含最近回覆的主題。',
+'Show unanswered topics'			=>	'查看還未被回覆過的主題。',
 'Show posted topics'				=>	'查看您參與過的主題。',
-'Mark all as read'					=>	'標記所有帖子為已讀',
+'Mark all as read'					=>	'標記所有文章為已讀',
 'Mark forum read'					=>	'標記該版塊為已讀',
 'Title separator'					=>	' / ',
 
 // Stuff for the page footer
 'Board footer'						=>	'頁腳',
-'Jump to'							=>	'論壇跳轉',
+'Jump to'							=>	'公告板跳轉',
 'Go'								=>	'前往', // Submit button in forum jump
 'Moderate topic'					=>	'管理主題',
 'Move topic'						=>	'移動主題',
@@ -139,11 +139,11 @@ $lang_common = array(
 
 // Email related notifications
 'New user notification'				=>	'警報 - 有新用戶註冊',
-'New user message'					=>	'用戶 \'%s\' 已在論壇註冊如下 %s',
+'New user message'					=>	'用戶 \'%s\' 已在公告板註冊如下 %s',
 'Banned email notification'			=>	'警報 - 發現封禁的電子信箱',
 'Banned email register message'		=>	'用戶 \'%s\' 註冊時使用了一個被封禁的電子信箱： %s',
 'Banned email change message'		=>	'用戶 \'%s\' 已更改為一個被封禁的電子郵箱： %s',
-'Banned email post message'			=>	'用戶 \'%s\' 發帖時使用了被封禁的電子信箱： %s',
+'Banned email post message'			=>	'用戶 \'%s\' 發文章時使用了被封禁的電子信箱： %s',
 'Duplicate email notification'		=>	'警報 - 發現重複的電子信箱',
 'Duplicate email register message'	=>	'用戶 \'%s\' 註冊使用的電子郵箱已經被 %s 使用',
 'Duplicate email change message'	=>	'用戶 \'%s\' 更改後的電子信箱地址已經被 %s 使用',
@@ -152,12 +152,12 @@ $lang_common = array(
 'Report message 2'					=>	'理由： %s',
 
 'User profile'						=>	'用戶個人資料： %s',
-'Post URL'							=>	'帖子URL： %s',
-'Email signature'					=>	'論壇郵件服務'."\n".'(請勿回復該郵件)',
+'Post URL'							=>	'文章URL： %s',
+'Email signature'					=>	'公告板郵件服務'."\n".'(請勿回覆該郵件)',
 
 // For extern.php RSS feed
 'RSS description'					=>	'%s 最近發表的主題。',
-'RSS description topic'				=>	'%s 最近發表的帖子。',
+'RSS description topic'				=>	'%s 最近發表的文章。',
 'RSS reply'							=>	'Re: ', // The topic subject will be appended to this string (to signify a reply)
 'RSS active topics feed'			=>	'RSS訂閱',
 'Atom active topics feed'			=>	'Atom訂閱',

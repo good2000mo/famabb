@@ -3,11 +3,11 @@
 // Language definitions used in various scripts
 $lang_misc = array(
 
-'Mark read redirect'			=>	'所有帖子已標記為已讀。正在跳轉 …',
-'Mark forum read redirect'		=>	'指定論壇中的所有主題已標記為已讀。正在跳轉 …',
+'Mark read redirect'			=>	'所有文章已標記為已讀。正在跳轉 …',
+'Mark forum read redirect'		=>	'指定公告板中的所有主題已標記為已讀。正在跳轉 …',
 
 // Send email
-'Form email disabled'			=>	'您無法發送電子郵件給用戶，該用戶設置了阻止論壇郵件。',
+'Form email disabled'			=>	'您無法發送電子郵件給用戶，該用戶設置了阻止公告板郵件。',
 'No email subject'				=>	'必須填寫郵件標題。',
 'No email message'				=>	'必須填寫郵件內容。',
 'Too long email message'		=>	'郵件長度不可超過65535字節 (64 KB)。',
@@ -24,9 +24,9 @@ $lang_misc = array(
 'Reason too long'				=>	'您填寫的理由不得超過65535字節 (~64kb)。',
 'Report flood'					=>	'兩次舉報之間至少需要間隔 %s 秒。請稍後重新嘗試。',
 'Report redirect'				=>	'舉報成功。正在跳轉 …',
-'Report post'					=>	'舉報帖子',
+'Report post'					=>	'舉報文章',
 'Reason'						=>	'理由',
-'Reason desc'					=>	'請填寫一條簡短的理由說明您為何要舉報該帖子',
+'Reason desc'					=>	'請填寫一條簡短的理由說明您為何要舉報該文章',
 
 // Subscriptions
 'Already subscribed topic'			=>	'您已經訂閱過了該主題。',
@@ -51,8 +51,8 @@ $lang_misc = array(
 'Move topics'					=>	'轉移主題',
 'Move legend'					=>	'選擇轉移目的地',
 'Move to'						=>	'轉移至',
-'Nowhere to move'				=>	'沒有論壇可接收要轉移的主題。',
-'Leave redirect'				=>	'保留原帖轉向鏈接',
+'Nowhere to move'				=>	'沒有公告板可接收要轉移的主題。',
+'Leave redirect'				=>	'保留原文章轉向鏈接',
 'Move topic redirect'			=>	'該主題已轉移。正在跳轉 …',
 'Move topics redirect'			=>	'主題已轉移。正在跳轉 …',
 'Confirm delete legend'			=>	'請確認刪除操作',
@@ -73,17 +73,17 @@ $lang_misc = array(
 'New subject'					=>	'新主題',
 
 // Split multiple posts in topic
-'Confirm split legend'			=>	'確認所選帖子的分離操作並選擇移往何處。',
-'Split posts'					=>	'分離帖子',
-'Split posts comply'			=>	'您確信要分離所選帖子？',
-'Split posts redirect'			=>	'帖子已分離。正在跳轉 …',
+'Confirm split legend'			=>	'確認所選文章的分離操作並選擇移往何處。',
+'Split posts'					=>	'分離文章',
+'Split posts comply'			=>	'您確信要分離所選文章？',
+'Split posts redirect'			=>	'文章已分離。正在跳轉 …',
 
 // Delete multiple posts in topic
-'Delete posts'					=>	'刪除帖子',
-'Cannot select first'			=>	'主題中的首個帖子不能分離/刪除。',
-'Delete posts comply'			=>	'您確信要刪除所選帖子？',
-'Delete posts redirect'			=>	'帖子已刪除。正在跳轉 …',
-'No posts selected'				=>	'您必須至少選擇一個帖子才能進行分離/刪除操作。',
+'Delete posts'					=>	'刪除文章',
+'Cannot select first'			=>	'主題中的首個文章不能分離/刪除。',
+'Delete posts comply'			=>	'您確信要刪除所選文章？',
+'Delete posts redirect'			=>	'文章已刪除。正在跳轉 …',
+'No posts selected'				=>	'您必須至少選擇一個文章才能進行分離/刪除操作。',
 
 // Get host
 'Host info 1'					=>	'IP地址： %s',

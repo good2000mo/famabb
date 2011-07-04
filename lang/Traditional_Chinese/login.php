@@ -20,7 +20,7 @@ $lang_login = array(
 'New passworderrors info'	=>	'在獲取新密碼前必須修正以下錯誤：',
 
 // Forget password mail stuff
-'Forget mail'				=>	'一封包含如何重設密碼說明的郵件已經發送至指定電子信箱。如未收到請聯繫論壇管理員',
+'Forget mail'				=>	'一封包含如何重設密碼說明的郵件已經發送至指定電子信箱。如未收到請聯繫公告板管理員',
 'Email flood'				=>	'該賬戶在過去一小時內已經申請過重設密碼。請稍後再嘗試重設密碼操作。'
 
 );
