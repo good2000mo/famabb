@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 05, 2011, 03:44 PM
+-- 建立日期: Jul 05, 2011, 04:22 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -137,7 +137,6 @@ INSERT INTO `fbb_config` VALUES ('o_smtp_user', NULL);
 INSERT INTO `fbb_config` VALUES ('o_smtp_pass', NULL);
 INSERT INTO `fbb_config` VALUES ('o_smtp_ssl', '0');
 INSERT INTO `fbb_config` VALUES ('o_regs_allow', '0');
-INSERT INTO `fbb_config` VALUES ('o_regs_verify', '0');
 INSERT INTO `fbb_config` VALUES ('o_announcement', '0');
 INSERT INTO `fbb_config` VALUES ('o_announcement_message', '在此填寫您要發佈的公告。');
 INSERT INTO `fbb_config` VALUES ('o_rules', '0');
@@ -270,7 +269,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1309851089, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1309853538, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -479,4 +478,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309836404, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309851089, NULL, NULL, NULL);
