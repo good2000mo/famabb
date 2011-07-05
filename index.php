@@ -17,24 +17,6 @@ if ($pun_user['g_read_board'] == '0')
 // Load the index.php language file
 require PUN_ROOT.'lang/'.$pun_user['language'].'/index.php';
 
-// Get list of forums and topics with new posts since last visit
-if (!$pun_user['is_guest'])
-{
-	$result = $db->query('SELECT t.forum_id, t.id, t.last_post FROM '.$db->prefix.'topics AS t INNER JOIN '.$db->prefix.'forums AS f ON f.id=t.forum_id LEFT JOIN '.$db->prefix.'forum_perms AS fp ON (fp.forum_id=f.id AND fp.group_id='.$pun_user['g_id'].') WHERE (fp.read_forum IS NULL OR fp.read_forum=1) AND t.last_post>'.$pun_user['last_visit'].' AND t.moved_to IS NULL') or error('Unable to fetch new topics', __FILE__, __LINE__, $db->error());
-
-	$new_topics = array();
-	while ($cur_topic = $db->fetch_assoc($result))
-		$new_topics[$cur_topic['forum_id']][$cur_topic['id']] = $cur_topic['last_post'];
-
-	$tracked_topics = get_tracked_topics();
-}
-
-$forum_actions = array();
-
-// Display a "mark all as read" link
-if (!$pun_user['is_guest'])
-	$forum_actions[] = '<a href="misc.php?action=markread">'.$lang_common['Mark all as read'].'</a>';
-
 $page_title = array(pun_htmlspecialchars($pun_config['o_board_title']));
 define('PUN_ALLOW_INDEX', 1);
 define('PUN_ACTIVE_PAGE', 'index');
@@ -73,23 +55,6 @@ while ($cur_forum = $db->fetch_assoc($result))
 	$item_status = ($forum_count % 2 == 0) ? 'roweven' : 'rowodd';
 	$forum_field_new = '';
 	$icon_type = 'icon';
-
-	// Are there new posts since our last visit?
-	if (!$pun_user['is_guest'] && $cur_forum['last_post'] > $pun_user['last_visit'] && (empty($tracked_topics['forums'][$cur_forum['fid']]) || $cur_forum['last_post'] > $tracked_topics['forums'][$cur_forum['fid']]))
-	{
-		// There are new posts in this forum, but have we read all of them already?
-		foreach ($new_topics[$cur_forum['fid']] as $check_topic_id => $check_last_post)
-		{
-			if ((empty($tracked_topics['topics'][$check_topic_id]) || $tracked_topics['topics'][$check_topic_id] < $check_last_post) && (empty($tracked_topics['forums'][$cur_forum['fid']]) || $tracked_topics['forums'][$cur_forum['fid']] < $check_last_post))
-			{
-				$item_status .= ' inew';
-				$forum_field_new = '<span class="newtext">[ <a href="search.php?action=show_new&amp;fid='.$cur_forum['fid'].'">'.$lang_common['New posts'].'</a> ]</span>';
-				$icon_type = 'icon icon-new';
-
-				break;
-			}
-		}
-	}
 
 	// Is this a redirect forum?
 	if ($cur_forum['redirect_url'] != '')
@@ -161,19 +126,6 @@ if ($pun_user['g_view_users'] == '1')
 	$stats['newest_user'] = '<a href="profile.php?id='.$stats['last_user']['id'].'">'.pun_htmlspecialchars($stats['last_user']['username']).'</a>';
 else
 	$stats['newest_user'] = pun_htmlspecialchars($stats['last_user']['username']);
-
-if (!empty($forum_actions))
-{
-
-?>
-<div class="linksb">
-	<div class="inbox crumbsplus">
-		<p class="subscribelink clearb"><?php echo implode(' - ', $forum_actions); ?></p>
-	</div>
-</div>
-<?php
-
-}
 
 ?>
 <?php

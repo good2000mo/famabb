@@ -427,12 +427,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 		}
 	}
 
-	$forum_actions = array();
-
-	// If we're on the new posts search, display a "mark all as read" link
-	if (!$pun_user['is_guest'] && $search_type[0] == 'action' && $search_type[1] == 'show_new')
-		$forum_actions[] = '<a href="misc.php?action=markread">'.$lang_common['Mark all as read'].'</a>';
-
 	// Fetch results to display
 	if (!empty($search_ids))
 	{
@@ -565,10 +559,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 			$post_count = 0;
 		}
 
-		// Get topic/forum tracking data
-		if (!$pun_user['is_guest'])
-			$tracked_topics = get_tracked_topics();
-
 		foreach ($search_set as $cur_search)
 		{
 			$forum = '<a href="viewboard.php?id='.$cur_search['forum_id'].'">'.pun_htmlspecialchars($cur_search['forum_name']).'</a>';
@@ -580,18 +570,8 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 			{
 				++$post_count;
 				$icon_type = 'icon';
-
-				if (!$pun_user['is_guest'] && $cur_search['last_post'] > $pun_user['last_visit'] && (!isset($tracked_topics['topics'][$cur_search['tid']]) || $tracked_topics['topics'][$cur_search['tid']] < $cur_search['last_post']) && (!isset($tracked_topics['forums'][$cur_search['forum_id']]) || $tracked_topics['forums'][$cur_search['forum_id']] < $cur_search['last_post']))
-				{
-					$item_status = 'inew';
-					$icon_type = 'icon icon-new';
-					$icon_text = $lang_topic['New icon'];
-				}
-				else
-				{
-					$item_status = '';
-					$icon_text = '<!-- -->';
-				}
+				$item_status = '';
+				$icon_text = '<!-- -->';
 
 				if ($pun_config['o_censoring'] == '1')
 					$cur_search['message'] = censor_words($cur_search['message']);
@@ -666,16 +646,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 					$item_status .= ' iclosed';
 				}
 
-				if (!$pun_user['is_guest'] && $cur_search['last_post'] > $pun_user['last_visit'] && (!isset($tracked_topics['topics'][$cur_search['tid']]) || $tracked_topics['topics'][$cur_search['tid']] < $cur_search['last_post']) && (!isset($tracked_topics['forums'][$cur_search['forum_id']]) || $tracked_topics['forums'][$cur_search['forum_id']] < $cur_search['last_post']))
-				{
-					$item_status .= ' inew';
-					$icon_type = 'icon icon-new';
-					$subject = '<strong>'.$subject.'</strong>';
-					$subject_new_posts = '<span class="newtext">[ <a href="viewtopic.php?id='.$cur_search['tid'].'&amp;action=new" title="'.$lang_common['New posts info'].'">'.$lang_common['New posts'].'</a> ]</span>';
-				}
-				else
-					$subject_new_posts = null;
-
 				// Insert the status text before the subject
 				$subject = implode(' ', $status_text).' '.$subject;
 
@@ -687,9 +657,8 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 					$subject_multipage = null;
 
 				// Should we show the "New posts" and/or the multipage links?
-				if (!empty($subject_new_posts) || !empty($subject_multipage))
+				if (!empty($subject_multipage))
 				{
-					$subject .= !empty($subject_new_posts) ? ' '.$subject_new_posts : '';
 					$subject .= !empty($subject_multipage) ? ' '.$subject_multipage : '';
 				}
 
@@ -726,7 +695,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 			<li><span>»&#160;</span><a href="search.php"><?php echo $crumbs_text['show_as'] ?></a></li>
 			<li><span>»&#160;</span><strong><?php echo $crumbs_text['search_type'] ?></strong></li>
 		</ul>
-<?php echo (!empty($forum_actions) ? "\t\t".'<p class="subscribelink clearb">'.implode(' - ', $forum_actions).'</p>'."\n" : '') ?>
 		<div class="clearer"></div>
 	</div>
 </div>

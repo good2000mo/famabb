@@ -62,10 +62,6 @@ if (($cur_forum['post_topics'] == '' && $pun_user['g_post_topics'] == '1') || $c
 else
 	$post_link = '';
 
-// Get topic/forum tracking data
-if (!$pun_user['is_guest'])
-	$tracked_topics = get_tracked_topics();
-
 // Determine the topic offset (based on $_GET['p'])
 $num_pages = ceil($cur_forum['num_topics'] / $pun_user['disp_topics']);
 
@@ -92,13 +88,6 @@ if ($num_pages > 1)
 		$page_head['next'] = '<link rel="next" href="viewboard.php?id='.$id.'&amp;p='.($p+1).'" title="'.sprintf($lang_common['Page'], $p+1).'" />';
 		$page_head['last'] = '<link rel="last" href="viewboard.php?id='.$id.'&amp;p='.$num_pages.'" title="'.sprintf($lang_common['Page'], $num_pages).'" />';
 	}
-}
-
-$forum_actions = array();
-
-if (!$pun_user['is_guest'])
-{
-	$forum_actions[] = '<a href="misc.php?action=markforumread&amp;fid='.$id.'">'.$lang_common['Mark forum read'].'</a>';
 }
 
 $page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), pun_htmlspecialchars($cur_forum['forum_name']));
@@ -187,16 +176,6 @@ if ($db->num_rows($result))
 			$item_status .= ' iclosed';
 		}
 
-		if (!$pun_user['is_guest'] && $cur_topic['last_post'] > $pun_user['last_visit'] && (!isset($tracked_topics['topics'][$cur_topic['id']]) || $tracked_topics['topics'][$cur_topic['id']] < $cur_topic['last_post']) && (!isset($tracked_topics['forums'][$id]) || $tracked_topics['forums'][$id] < $cur_topic['last_post']) && $cur_topic['moved_to'] == null)
-		{
-			$item_status .= ' inew';
-			$icon_type = 'icon icon-new';
-			$subject = '<strong>'.$subject.'</strong>';
-			$subject_new_posts = '<span class="newtext">[ <a href="viewtopic.php?id='.$cur_topic['id'].'&amp;action=new" title="'.$lang_common['New posts info'].'">'.$lang_common['New posts'].'</a> ]</span>';
-		}
-		else
-			$subject_new_posts = null;
-
 		// Insert the status text before the subject
 		$subject = implode(' ', $status_text).' '.$subject;
 
@@ -218,9 +197,8 @@ if ($db->num_rows($result))
 			$subject_multipage = null;
 
 		// Should we show the "New posts" and/or the multipage links?
-		if (!empty($subject_new_posts) || !empty($subject_multipage))
+		if (!empty($subject_multipage))
 		{
-			$subject .= !empty($subject_new_posts) ? ' '.$subject_new_posts : '';
 			$subject .= !empty($subject_multipage) ? ' '.$subject_multipage : '';
 		}
 
@@ -269,7 +247,6 @@ else
 			<li><a href="index.php"><?php echo $lang_common['Index'] ?></a></li>
 			<li><span>»&#160;</span><a href="viewboard.php?id=<?php echo $id ?>"><strong><?php echo pun_htmlspecialchars($cur_forum['forum_name']) ?></strong></a></li>
 		</ul>
-<?php echo (!empty($forum_actions) ? "\t\t".'<p class="subscribelink clearb">'.implode(' - ', $forum_actions).'</p>'."\n" : '') ?>
 		<div class="clearer"></div>
 	</div>
 </div>
