@@ -159,43 +159,6 @@ if (isset($_POST['form_sent']))
 		$db->query('INSERT INTO '.$db->prefix.'users (username, group_id, password, email, email_setting, timezone, dst, language, style, registered, registration_ip, last_visit) VALUES(\''.$db->escape($username).'\', '.$intial_group_id.', \''.$password_hash.'\', \''.$db->escape($email1).'\', '.$email_setting.', '.$timezone.' , '.$dst.', \''.$db->escape($language).'\', \''.$pun_config['o_default_style'].'\', '.$now.', \''.get_remote_address().'\', '.$now.')') or error('Unable to create user', __FILE__, __LINE__, $db->error());
 		$new_uid = $db->insert_id();
 
-		// If the mailing list isn't empty, we may need to send out some alerts
-		if ($pun_config['o_mailing_list'] != '')
-		{
-			// If we previously found out that the email was banned
-			if ($banned_email)
-			{
-				$mail_subject = $lang_common['Banned email notification'];
-				$mail_message = sprintf($lang_common['Banned email register message'], $username, $email1)."\n";
-				$mail_message .= sprintf($lang_common['User profile'], get_base_url().'/profile.php?id='.$new_uid)."\n";
-				$mail_message .= "\n".'--'."\n".$lang_common['Email signature'];
-
-				pun_mail($pun_config['o_mailing_list'], $mail_subject, $mail_message);
-			}
-
-			// If we previously found out that the email was a dupe
-			if (!empty($dupe_list))
-			{
-				$mail_subject = $lang_common['Duplicate email notification'];
-				$mail_message = sprintf($lang_common['Duplicate email register message'], $username, implode(', ', $dupe_list))."\n";
-				$mail_message .= sprintf($lang_common['User profile'], get_base_url().'/profile.php?id='.$new_uid)."\n";
-				$mail_message .= "\n".'--'."\n".$lang_common['Email signature'];
-
-				pun_mail($pun_config['o_mailing_list'], $mail_subject, $mail_message);
-			}
-
-			// Should we alert people on the admin mailing list that a new user has registered?
-			if ($pun_config['o_regs_report'] == '1')
-			{
-				$mail_subject = $lang_common['New user notification'];
-				$mail_message = sprintf($lang_common['New user message'], $username, get_base_url().'/')."\n";
-				$mail_message .= sprintf($lang_common['User profile'], get_base_url().'/profile.php?id='.$new_uid)."\n";
-				$mail_message .= "\n".'--'."\n".$lang_common['Email signature'];
-
-				pun_mail($pun_config['o_mailing_list'], $mail_subject, $mail_message);
-			}
-		}
-
 		// Must the user verify the registration or do we log him/her in right now?
 		if ($pun_config['o_regs_verify'] == '1')
 		{

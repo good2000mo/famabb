@@ -221,17 +221,6 @@ if (isset($_POST['form_sent']))
 			update_forum($fid);
 		}
 
-		// If we previously found out that the email was banned
-		if ($pun_user['is_guest'] && $banned_email && $pun_config['o_mailing_list'] != '')
-		{
-			$mail_subject = $lang_common['Banned email notification'];
-			$mail_message = sprintf($lang_common['Banned email post message'], $username, $email)."\n";
-			$mail_message .= sprintf($lang_common['Post URL'], get_base_url().'/viewtopic.php?pid='.$new_pid.'#p'.$new_pid)."\n";
-			$mail_message .= "\n".'--'."\n".$lang_common['Email signature'];
-
-			pun_mail($pun_config['o_mailing_list'], $mail_subject, $mail_message);
-		}
-
 		// If the posting user is logged in, increment his/her post count
 		if (!$pun_user['is_guest'])
 		{

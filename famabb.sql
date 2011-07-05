@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 05, 2011, 10:13 AM
+-- 建立日期: Jul 05, 2011, 03:44 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -123,10 +123,7 @@ INSERT INTO `fbb_config` VALUES ('o_show_dot', '0');
 INSERT INTO `fbb_config` VALUES ('o_topic_views', '1');
 INSERT INTO `fbb_config` VALUES ('o_gzip', '0');
 INSERT INTO `fbb_config` VALUES ('o_additional_navlinks', '');
-INSERT INTO `fbb_config` VALUES ('o_report_method', '0');
-INSERT INTO `fbb_config` VALUES ('o_regs_report', '0');
 INSERT INTO `fbb_config` VALUES ('o_default_email_setting', '1');
-INSERT INTO `fbb_config` VALUES ('o_mailing_list', 'comus2010mo@hotmail.com');
 INSERT INTO `fbb_config` VALUES ('o_avatars', '1');
 INSERT INTO `fbb_config` VALUES ('o_avatars_dir', 'img/avatars');
 INSERT INTO `fbb_config` VALUES ('o_avatars_width', '60');
@@ -273,6 +270,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1309851089, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -322,31 +320,6 @@ CREATE TABLE `fbb_ranks` (
 
 INSERT INTO `fbb_ranks` VALUES (1, '新用戶', 0);
 INSERT INTO `fbb_ranks` VALUES (2, '用戶', 10);
-
--- --------------------------------------------------------
-
--- 
--- 資料表格式： `fbb_reports`
--- 
-
-CREATE TABLE `fbb_reports` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `post_id` int(10) unsigned NOT NULL default '0',
-  `topic_id` int(10) unsigned NOT NULL default '0',
-  `forum_id` int(10) unsigned NOT NULL default '0',
-  `reported_by` int(10) unsigned NOT NULL default '0',
-  `created` int(10) unsigned NOT NULL default '0',
-  `message` text,
-  `zapped` int(10) unsigned default NULL,
-  `zapped_by` int(10) unsigned default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `fbb_reports_zapped_idx` (`zapped`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- 
--- 列出以下資料庫的數據： `fbb_reports`
--- 
-
 
 -- --------------------------------------------------------
 
@@ -446,7 +419,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 28, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 33, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -506,4 +479,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309750828, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309836404, NULL, NULL, NULL);

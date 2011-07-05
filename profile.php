@@ -208,15 +208,6 @@ else if ($action == 'change_email')
 		{
 			if ($pun_config['p_allow_banned_email'] == '0')
 				message($lang_prof_reg['Banned email']);
-			else if ($pun_config['o_mailing_list'] != '')
-			{
-				$mail_subject = $lang_common['Banned email notification'];
-				$mail_message = sprintf($lang_common['Banned email change message'], $pun_user['username'], $new_email)."\n";
-				$mail_message .= sprintf($lang_common['User profile'], get_base_url().'/profile.php?id='.$id)."\n";
-				$mail_message .= "\n".'--'."\n".$lang_common['Email signature'];
-
-				pun_mail($pun_config['o_mailing_list'], $mail_subject, $mail_message);
-			}
 		}
 
 		// Check if someone else already has registered with that email address
@@ -225,18 +216,6 @@ else if ($action == 'change_email')
 		{
 			if ($pun_config['p_allow_dupe_email'] == '0')
 				message($lang_prof_reg['Dupe email']);
-			else if ($pun_config['o_mailing_list'] != '')
-			{
-				while ($cur_dupe = $db->fetch_assoc($result))
-					$dupe_list[] = $cur_dupe['username'];
-
-				$mail_subject = $lang_common['Duplicate email notification'];
-				$mail_message = sprintf($lang_common['Duplicate email change message'], $pun_user['username'], implode(', ', $dupe_list))."\n";
-				$mail_message .= sprintf($lang_common['User profile'], get_base_url().'/profile.php?id='.$id)."\n";
-				$mail_message .= "\n".'--'."\n".$lang_common['Email signature'];
-
-				pun_mail($pun_config['o_mailing_list'], $mail_subject, $mail_message);
-			}
 		}
 
 
