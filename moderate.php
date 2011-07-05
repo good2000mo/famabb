@@ -905,19 +905,6 @@ if ($db->num_rows($result))
 		// Insert the status text before the subject
 		$subject = implode(' ', $status_text).' '.$subject;
 
-		$num_pages_topic = ceil(($cur_topic['num_replies'] + 1) / $pun_user['disp_posts']);
-
-		if ($num_pages_topic > 1)
-			$subject_multipage = '<span class="pagestext">[ '.paginate($num_pages_topic, -1, 'viewtopic.php?id='.$cur_topic['id']).' ]</span>';
-		else
-			$subject_multipage = null;
-
-		// Should we show the "New posts" and/or the multipage links?
-		if (!empty($subject_multipage))
-		{
-			$subject .= !empty($subject_multipage) ? ' '.$subject_multipage : '';
-		}
-
 ?>
 				<tr class="<?php echo $item_status ?>">
 					<td class="tcl">
