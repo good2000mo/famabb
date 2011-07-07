@@ -203,13 +203,6 @@ else if ($action == 'change_email')
 		if (!is_valid_email($new_email))
 			message($lang_common['Invalid email']);
 
-		// Check if it's a banned email address
-		if (is_banned_email($new_email))
-		{
-			if ($pun_config['p_allow_banned_email'] == '0')
-				message($lang_prof_reg['Banned email']);
-		}
-
 		// Check if someone else already has registered with that email address
 		$result = $db->query('SELECT id, username FROM '.$db->prefix.'users WHERE email=\''.$db->escape($new_email).'\'') or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 		if ($db->num_rows($result))
@@ -497,15 +490,6 @@ else if (isset($_POST['update_forums']))
 }
 
 
-else if (isset($_POST['ban']))
-{
-	if ($pun_user['g_id'] != PUN_ADMIN && ($pun_user['g_moderator'] != '1' || $pun_user['g_mod_ban_users'] == '0'))
-		message($lang_common['No permission']);
-
-	redirect('admin_bans.php?add_ban='.$id, $lang_profile['Ban redirect']);
-}
-
-
 else if (isset($_POST['delete_user']) || isset($_POST['delete_user_comply']))
 {
 	if ($pun_user['g_id'] > PUN_ADMIN)
@@ -727,7 +711,7 @@ else if (isset($_POST['form_sent']))
 				{
 					// A list of words that the title may not contain
 					// If the language is English, there will be some duplicates, but it's not the end of the world
-					$forbidden = array('member', 'moderator', 'administrator', 'banned', 'guest', utf8_strtolower($lang_common['Member']), utf8_strtolower($lang_common['Moderator']), utf8_strtolower($lang_common['Administrator']), utf8_strtolower($lang_common['Banned']), utf8_strtolower($lang_common['Guest']));
+					$forbidden = array('member', 'moderator', 'administrator', 'guest', utf8_strtolower($lang_common['Member']), utf8_strtolower($lang_common['Moderator']), utf8_strtolower($lang_common['Administrator']), utf8_strtolower($lang_common['Guest']));
 
 					if (in_array(utf8_strtolower($form['title']), $forbidden))
 						message($lang_profile['Forbidden title']);
@@ -1579,7 +1563,7 @@ else
 	}
 	else if ($section == 'admin')
 	{
-		if (!$pun_user['is_admmod'] || ($pun_user['g_moderator'] == '1' && $pun_user['g_mod_ban_users'] == '0'))
+		if (!$pun_user['is_admmod'])
 			message($lang_common['Bad request']);
 
 		$page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_common['Profile'], $lang_profile['Section admin']);
@@ -1598,21 +1582,6 @@ else
 					<fieldset>
 <?php
 
-		if ($pun_user['g_moderator'] == '1')
-		{
-
-?>
-						<legend><?php echo $lang_profile['Delete ban legend'] ?></legend>
-						<div class="infldset">
-							<p><input type="submit" name="ban" value="<?php echo $lang_profile['Ban user'] ?>" /></p>
-						</div>
-					</fieldset>
-				</div>
-<?php
-
-		}
-		else
-		{
 			if ($pun_user['id'] != $id)
 			{
 
@@ -1645,9 +1614,9 @@ else
 			}
 
 ?>
-						<legend><?php echo $lang_profile['Delete ban legend'] ?></legend>
+						<legend><?php echo $lang_profile['Delete legend'] ?></legend>
 						<div class="infldset">
-							<input type="submit" name="delete_user" value="<?php echo $lang_profile['Delete user'] ?>" /> <input type="submit" name="ban" value="<?php echo $lang_profile['Ban user'] ?>" />
+							<input type="submit" name="delete_user" value="<?php echo $lang_profile['Delete user'] ?>" />
 						</div>
 					</fieldset>
 				</div>
@@ -1696,7 +1665,6 @@ else
 <?php
 
 			}
-		}
 
 ?>
 			</form>

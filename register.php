@@ -92,17 +92,6 @@ if (isset($_POST['form_sent']))
 	if (!is_valid_email($email1))
 		$errors[] = $lang_common['Invalid email'];
 
-	// Check if it's a banned email address
-	if (is_banned_email($email1))
-	{
-		if ($pun_config['p_allow_banned_email'] == '0')
-			$errors[] = $lang_prof_reg['Banned email'];
-
-		$banned_email = true; // Used later when we send an alert email
-	}
-	else
-		$banned_email = false;
-
 	// Check if someone else already has registered with that email address
 	$dupe_list = array();
 

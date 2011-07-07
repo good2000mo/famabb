@@ -100,18 +100,6 @@ if (isset($_POST['form_sent']))
 			require PUN_ROOT.'include/email.php';
 			if (!is_valid_email($email))
 				$errors[] = $lang_common['Invalid email'];
-
-			// Check if it's a banned email address
-			// we should only check guests because members addresses are already verified
-			if ($pun_user['is_guest'] && is_banned_email($email))
-			{
-				if ($pun_config['p_allow_banned_email'] == '0')
-					$errors[] = $lang_prof_reg['Banned email'];
-
-				$banned_email = true; // Used later when we send an alert email
-			}
-			else
-				$banned_email = false;
 		}
 	}
 
