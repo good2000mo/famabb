@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 07, 2011, 10:37 AM
+-- 建立日期: Jul 08, 2011, 01:01 AM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -76,7 +76,6 @@ INSERT INTO `fbb_config` VALUES ('o_disp_posts_default', '25');
 INSERT INTO `fbb_config` VALUES ('o_indent_num_spaces', '4');
 INSERT INTO `fbb_config` VALUES ('o_quote_depth', '3');
 INSERT INTO `fbb_config` VALUES ('o_quickpost', '1');
-INSERT INTO `fbb_config` VALUES ('o_ranks', '1');
 INSERT INTO `fbb_config` VALUES ('o_show_dot', '0');
 INSERT INTO `fbb_config` VALUES ('o_topic_views', '1');
 INSERT INTO `fbb_config` VALUES ('o_gzip', '0');
@@ -225,7 +224,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1310005486, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1310056168, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -255,26 +254,6 @@ CREATE TABLE `fbb_posts` (
 -- 
 
 INSERT INTO `fbb_posts` VALUES (1, 'admin', 2, '127.0.0.1', NULL, '如果您在閱讀這個文章(我猜正是如此)，安裝的 FluxBB 已經開始工作！現在您可以登錄，並進入頂部的管理設置面板來配置您的論壇。', 0, 1309485691, NULL, NULL, 1);
-
--- --------------------------------------------------------
-
--- 
--- 資料表格式： `fbb_ranks`
--- 
-
-CREATE TABLE `fbb_ranks` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `rank` varchar(50) NOT NULL default '',
-  `min_posts` mediumint(8) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
--- 
--- 列出以下資料庫的數據： `fbb_ranks`
--- 
-
-INSERT INTO `fbb_ranks` VALUES (1, '新用戶', 0);
-INSERT INTO `fbb_ranks` VALUES (2, '用戶', 10);
 
 -- --------------------------------------------------------
 
@@ -434,4 +413,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309853538, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310005486, NULL, NULL, NULL);
