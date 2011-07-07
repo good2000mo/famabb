@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Copyright (C) 2008-2011 FluxBB
@@ -51,7 +51,7 @@ function split_words($text, $idx)
 	$text = preg_replace('/\[\/?(b|u|s|ins|del|em|i|h|colou?r|quote|code|img|url|email|list)(?:\=[^\]]*)?\]/', ' ', $text);
 
 	// Remove any apostrophes or dashes which aren't part of words
-	$text = substr(ucp_preg_replace('/((?i<=[^\p{L}\p{N}])[\'\-]|[\'\-](?=[^\p{L}\p{N}]))/u', '', ' '.$text.' '), 1, -1);
+	$text = substr(ucp_preg_replace('/((?<=[^\p{L}\p{N}])[\'\-]|[\'\-](?=[^\p{L}\p{N}]))/u', '', ' '.$text.' '), 1, -1);
 
 	// Remove punctuation and symbols (actually anything that isn't a letter or number), allow apostrophes and dashes (and % * if we aren't indexing)
 	$text = ucp_preg_replace('/(?![\'\-'.($idx ? '' : '%\*').'])[^\p{L}\p{N}]+/u', ' ', $text);
@@ -310,3 +310,5 @@ function strip_search_index($post_ids)
 
 	$db->query('DELETE FROM '.$db->prefix.'search_matches WHERE post_id IN('.$post_ids.')') or error('Unable to delete search index word match', __FILE__, __LINE__, $db->error());
 }
+
+?>
