@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 05, 2011, 04:22 PM
+-- 建立日期: Jul 07, 2011, 09:53 AM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -58,24 +58,6 @@ INSERT INTO `fbb_categories` VALUES (1, '測試分類', 1);
 -- --------------------------------------------------------
 
 -- 
--- 資料表格式： `fbb_censoring`
--- 
-
-CREATE TABLE `fbb_censoring` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `search_for` varchar(60) NOT NULL default '',
-  `replace_with` varchar(60) NOT NULL default '',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- 
--- 列出以下資料庫的數據： `fbb_censoring`
--- 
-
-
--- --------------------------------------------------------
-
--- 
 -- 資料表格式： `fbb_config`
 -- 
 
@@ -117,7 +99,6 @@ INSERT INTO `fbb_config` VALUES ('o_disp_posts_default', '25');
 INSERT INTO `fbb_config` VALUES ('o_indent_num_spaces', '4');
 INSERT INTO `fbb_config` VALUES ('o_quote_depth', '3');
 INSERT INTO `fbb_config` VALUES ('o_quickpost', '1');
-INSERT INTO `fbb_config` VALUES ('o_censoring', '0');
 INSERT INTO `fbb_config` VALUES ('o_ranks', '1');
 INSERT INTO `fbb_config` VALUES ('o_show_dot', '0');
 INSERT INTO `fbb_config` VALUES ('o_topic_views', '1');
@@ -269,7 +250,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1309853538, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1310003147, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -418,7 +399,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 33, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 34, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -478,4 +459,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309851089, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1309853538, NULL, NULL, NULL);

@@ -152,9 +152,6 @@ if ($db->num_rows($result))
 		$item_status = ($topic_count % 2 == 0) ? 'roweven' : 'rowodd';
 		$icon_type = 'icon';
 
-		if ($pun_config['o_censoring'] == '1')
-			$cur_topic['subject'] = censor_words($cur_topic['subject']);
-
 		if ($cur_topic['sticky'] == '1')
 		{
 			$item_status .= ' isticky';

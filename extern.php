@@ -303,9 +303,6 @@ if ($action == 'feed')
 
 		$cur_topic = $db->fetch_assoc($result);
 
-		if ($pun_config['o_censoring'] == '1')
-			$cur_topic['subject'] = censor_words($cur_topic['subject']);
-
 		// Setup the feed
 		$feed = array(
 			'title' 		=>	$pun_config['o_board_title'].$lang_common['Title separator'].$cur_topic['subject'],
@@ -398,9 +395,6 @@ if ($action == 'feed')
 			$result = $db->query('SELECT t.id, t.poster, t.subject, t.posted, t.last_post, t.last_poster, p.message, p.hide_smilies, u.email_setting, u.email, p.poster_id, p.poster_email FROM '.$db->prefix.'topics AS t INNER JOIN '.$db->prefix.'posts AS p ON p.id='.($order_posted ? 't.first_post_id' : 't.last_post_id').' INNER JOIN '.$db->prefix.'users AS u ON u.id=p.poster_id LEFT JOIN '.$db->prefix.'forum_perms AS fp ON (fp.forum_id=t.forum_id AND fp.group_id='.$pun_user['g_id'].') WHERE (fp.read_forum IS NULL OR fp.read_forum=1) AND t.moved_to IS NULL'.$forum_sql.' ORDER BY '.($order_posted ? 't.posted' : 't.last_post').' DESC LIMIT '.$show) or error('Unable to fetch topic info', __FILE__, __LINE__, $db->error());
 			while ($cur_topic = $db->fetch_assoc($result))
 			{
-				if ($pun_config['o_censoring'] == '1')
-					$cur_topic['subject'] = censor_words($cur_topic['subject']);
-
 				$cur_topic['message'] = parse_message($cur_topic['message'], $cur_topic['hide_smilies']);
 
 				$item = array(
