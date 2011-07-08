@@ -171,7 +171,6 @@ if (isset($_GET['show_users']))
 					<th class="tc2" scope="col"><?php echo $lang_admin_users['Results e-mail head'] ?></th>
 					<th class="tc3" scope="col"><?php echo $lang_admin_users['Results title head'] ?></th>
 					<th class="tc4" scope="col"><?php echo $lang_admin_users['Results posts head'] ?></th>
-					<th class="tc5" scope="col"><?php echo $lang_admin_users['Results admin note head'] ?></th>
 					<th class="tcr" scope="col"><?php echo $lang_admin_users['Results actions head'] ?></th>
 				</tr>
 			</thead>
@@ -188,7 +187,7 @@ if (isset($_GET['show_users']))
 		{
 			list($poster_id, $poster) = $db->fetch_row($result);
 
-			$result2 = $db->query('SELECT u.id, u.username, u.email, u.title, u.num_posts, u.admin_note, g.g_id, g.g_user_title FROM '.$db->prefix.'users AS u INNER JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id>1 AND u.id='.$poster_id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+			$result2 = $db->query('SELECT u.id, u.username, u.email, u.title, u.num_posts, g.g_id, g.g_user_title FROM '.$db->prefix.'users AS u INNER JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id>1 AND u.id='.$poster_id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 
 			if (($user_data = $db->fetch_assoc($result2)))
 			{
@@ -216,7 +215,6 @@ if (isset($_GET['show_users']))
 					<td class="tc2">&#160;</td>
 					<td class="tc3"><?php echo $lang_admin_users['Results guest'] ?></td>
 					<td class="tc4">&#160;</td>
-					<td class="tc5">&#160;</td>
 					<td class="tcr">&#160;</td>
 				</tr>
 <?php
@@ -658,7 +656,6 @@ else if (isset($_GET['find_user']))
 					<th class="tc2" scope="col"><?php echo $lang_admin_users['Results e-mail head'] ?></th>
 					<th class="tc3" scope="col"><?php echo $lang_admin_users['Results title head'] ?></th>
 					<th class="tc4" scope="col"><?php echo $lang_admin_users['Results posts head'] ?></th>
-					<th class="tc5" scope="col"><?php echo $lang_admin_users['Results admin note head'] ?></th>
 					<th class="tcr" scope="col"><?php echo $lang_admin_users['Results actions head'] ?></th>
 <?php if ($can_action): ?>					<th class="tcmod" scope="col"><?php echo $lang_admin_users['Select'] ?></th>
 <?php endif; ?>
@@ -667,7 +664,7 @@ else if (isset($_GET['find_user']))
 			<tbody>
 <?php
 
-	$result = $db->query('SELECT u.id, u.username, u.email, u.title, u.num_posts, u.admin_note, g.g_id, g.g_user_title FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id>1'.(!empty($conditions) ? ' AND '.implode(' AND ', $conditions) : '').' ORDER BY '.$db->escape($order_by).' '.$db->escape($direction).' LIMIT '.$start_from.', 50') or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+	$result = $db->query('SELECT u.id, u.username, u.email, u.title, u.num_posts, g.g_id, g.g_user_title FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id>1'.(!empty($conditions) ? ' AND '.implode(' AND ', $conditions) : '').' ORDER BY '.$db->escape($order_by).' '.$db->escape($direction).' LIMIT '.$start_from.', 50') or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 	if ($db->num_rows($result))
 	{
 		while ($user_data = $db->fetch_assoc($result))
