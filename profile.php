@@ -1152,7 +1152,7 @@ else
 					<fieldset>
 						<legend><?php echo $lang_profile['User activity'] ?></legend>
 						<div class="infldset">
-							<p><?php printf($lang_profile['Registered info'], format_time($user['registered'], true) ?></p>
+							<p><?php printf($lang_profile['Registered info'], format_time($user['registered'], true)) ?></p>
 							<p><?php printf($lang_profile['Last post info'], $last_post) ?></p>
 							<p><?php printf($lang_profile['Last visit info'], format_time($user['last_visit'])) ?></p>
 							<?php echo $posts_field ?>
