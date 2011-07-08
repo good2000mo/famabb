@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 08, 2011, 11:45 AM
+-- 建立日期: Jul 08, 2011, 02:19 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -63,9 +63,7 @@ INSERT INTO `fbb_config` VALUES ('o_redirect_delay', '1');
 INSERT INTO `fbb_config` VALUES ('o_show_version', '0');
 INSERT INTO `fbb_config` VALUES ('o_show_user_info', '1');
 INSERT INTO `fbb_config` VALUES ('o_show_post_count', '1');
-INSERT INTO `fbb_config` VALUES ('o_signatures', '1');
 INSERT INTO `fbb_config` VALUES ('o_smilies', '1');
-INSERT INTO `fbb_config` VALUES ('o_smilies_sig', '1');
 INSERT INTO `fbb_config` VALUES ('o_make_links', '1');
 INSERT INTO `fbb_config` VALUES ('o_default_lang', 'Traditional_Chinese');
 INSERT INTO `fbb_config` VALUES ('o_default_style', 'Lithium');
@@ -104,11 +102,6 @@ INSERT INTO `fbb_config` VALUES ('p_message_bbcode', '1');
 INSERT INTO `fbb_config` VALUES ('p_message_img_tag', '1');
 INSERT INTO `fbb_config` VALUES ('p_message_all_caps', '1');
 INSERT INTO `fbb_config` VALUES ('p_subject_all_caps', '1');
-INSERT INTO `fbb_config` VALUES ('p_sig_all_caps', '1');
-INSERT INTO `fbb_config` VALUES ('p_sig_bbcode', '1');
-INSERT INTO `fbb_config` VALUES ('p_sig_img_tag', '0');
-INSERT INTO `fbb_config` VALUES ('p_sig_length', '400');
-INSERT INTO `fbb_config` VALUES ('p_sig_lines', '4');
 INSERT INTO `fbb_config` VALUES ('p_allow_dupe_email', '0');
 INSERT INTO `fbb_config` VALUES ('p_force_guest_email', '1');
 
@@ -222,7 +215,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1310096190, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1310105786, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -351,7 +344,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 35, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 37, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -398,4 +391,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310005486, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310097157, NULL, NULL);
