@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 08, 2011, 09:35 AM
+-- 建立日期: Jul 08, 2011, 11:45 AM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -100,7 +100,6 @@ INSERT INTO `fbb_config` VALUES ('o_rules', '0');
 INSERT INTO `fbb_config` VALUES ('o_rules_message', '在此填寫公告板服務條款');
 INSERT INTO `fbb_config` VALUES ('o_maintenance', '0');
 INSERT INTO `fbb_config` VALUES ('o_maintenance_message', '公告板維護中。請稍後訪問。');
-INSERT INTO `fbb_config` VALUES ('o_default_dst', '0');
 INSERT INTO `fbb_config` VALUES ('p_message_bbcode', '1');
 INSERT INTO `fbb_config` VALUES ('p_message_img_tag', '1');
 INSERT INTO `fbb_config` VALUES ('p_message_all_caps', '1');
@@ -223,7 +222,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (1, '127.0.0.1', 1310056168, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1310096190, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -352,7 +351,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 34, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 35, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -367,15 +366,6 @@ CREATE TABLE `fbb_users` (
   `password` varchar(40) NOT NULL default '',
   `email` varchar(80) NOT NULL default '',
   `title` varchar(50) default NULL,
-  `realname` varchar(40) default NULL,
-  `url` varchar(100) default NULL,
-  `jabber` varchar(80) default NULL,
-  `icq` varchar(12) default NULL,
-  `msn` varchar(80) default NULL,
-  `aim` varchar(30) default NULL,
-  `yahoo` varchar(30) default NULL,
-  `location` varchar(30) default NULL,
-  `signature` text,
   `disp_topics` tinyint(3) unsigned default NULL,
   `disp_posts` tinyint(3) unsigned default NULL,
   `email_setting` tinyint(1) NOT NULL default '1',
@@ -383,11 +373,8 @@ CREATE TABLE `fbb_users` (
   `auto_notify` tinyint(1) NOT NULL default '0',
   `show_smilies` tinyint(1) NOT NULL default '1',
   `show_img` tinyint(1) NOT NULL default '1',
-  `show_img_sig` tinyint(1) NOT NULL default '1',
   `show_avatars` tinyint(1) NOT NULL default '1',
-  `show_sig` tinyint(1) NOT NULL default '1',
   `timezone` float NOT NULL default '0',
-  `dst` tinyint(1) NOT NULL default '0',
   `time_format` tinyint(1) NOT NULL default '0',
   `date_format` tinyint(1) NOT NULL default '0',
   `language` varchar(25) NOT NULL default 'English',
@@ -399,7 +386,6 @@ CREATE TABLE `fbb_users` (
   `registered` int(10) unsigned NOT NULL default '0',
   `registration_ip` varchar(39) NOT NULL default '0.0.0.0',
   `last_visit` int(10) unsigned NOT NULL default '0',
-  `admin_note` varchar(30) default NULL,
   `activate_string` varchar(80) default NULL,
   `activate_key` varchar(8) default NULL,
   PRIMARY KEY  (`id`),
@@ -411,5 +397,5 @@ CREATE TABLE `fbb_users` (
 -- 列出以下資料庫的數據： `fbb_users`
 -- 
 
-INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 1, 1, 8, 0, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310005486, NULL, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310005486, NULL, NULL);

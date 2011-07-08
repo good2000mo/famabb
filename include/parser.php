@@ -62,17 +62,9 @@ $smilies = array(
 //
 // Make sure all BBCodes are lower case and do a little cleanup
 //
-function preparse_bbcode($text, &$errors, $is_signature = false)
+function preparse_bbcode($text, &$errors)
 {
 	global $pun_config, $lang_common, $lang_post, $re_list;
-
-	if ($is_signature)
-	{
-		global $lang_profile;
-
-		if (preg_match('%\[/?(?:quote|code|list|h)\b[^\]]*\]%i', $text))
-			$errors[] = $lang_profile['Signature quote/code/list/h'];
-	}
 
 	// If the message contains a code tag we have to split it up (text within [code][/code] shouldn't be touched)
 	if (strpos($text, '[code]') !== false && strpos($text, '[/code]') !== false)
@@ -112,7 +104,7 @@ function preparse_bbcode($text, &$errors, $is_signature = false)
 
 	$temp_text = false;
 	if (empty($errors))
-		$temp_text = preparse_tags($text, $errors, $is_signature);
+		$temp_text = preparse_tags($text, $errors);
 
 	if ($temp_text !== false)
 		$text = $temp_text;
@@ -189,7 +181,7 @@ function strip_empty_bbcode($text, &$errors)
 //
 // Check the structure of bbcode tags and fix simple mistakes where possible
 //
-function preparse_tags($text, &$errors, $is_signature = false)
+function preparse_tags($text, &$errors)
 {
 	global $lang_common, $pun_config;
 
@@ -657,7 +649,7 @@ function handle_url_tag($url, $link = '', $bbcode = false)
 //
 // Turns an URL from the [img] tag into an <img> tag or a <a href...> tag
 //
-function handle_img_tag($url, $is_signature = false, $alt = null)
+function handle_img_tag($url, $alt = null)
 {
 	global $lang_common, $pun_user;
 
@@ -666,9 +658,7 @@ function handle_img_tag($url, $is_signature = false, $alt = null)
 
 	$img_tag = '<a href="'.$url.'">&lt;'.$lang_common['Image link'].' - '.$alt.'&gt;</a>';
 
-	if ($is_signature && $pun_user['show_img_sig'] != '0')
-		$img_tag = '<img class="sigimage" src="'.$url.'" alt="'.$alt.'" />';
-	else if (!$is_signature && $pun_user['show_img'] != '0')
+	if ($pun_user['show_img'] != '0')
 		$img_tag = '<span class="postimg"><img src="'.$url.'" alt="'.$alt.'" /></span>';
 
 	return $img_tag;
@@ -707,7 +697,7 @@ function handle_list_tag($content, $type = '*')
 //
 // Convert BBCodes to their HTML equivalent
 //
-function do_bbcode($text, $is_signature = false)
+function do_bbcode($text)
 {
 	global $lang_common, $pun_user, $pun_config, $re_list;
 
@@ -718,11 +708,8 @@ function do_bbcode($text, $is_signature = false)
 		$text = preg_replace('#\s*\[\/quote\]#S', '</p></div></blockquote></div><p>', $text);
 	}
 
-	if (!$is_signature)
-	{
-		$pattern[] = $re_list;
-		$replace[] = 'handle_list_tag(\'$2\', \'$1\')';
-	}
+	$pattern[] = $re_list;
+	$replace[] = 'handle_list_tag(\'$2\', \'$1\')';
 
 	$pattern[] = '#\[b\](.*?)\[/b\]#ms';
 	$pattern[] = '#\[i\](.*?)\[/i\]#ms';
@@ -744,20 +731,12 @@ function do_bbcode($text, $is_signature = false)
 	$replace[] = '<span style="color: $1">$2</span>';
 	$replace[] = '</p><h5>$1</h5><p>';
 
-	if (($is_signature && $pun_config['p_sig_img_tag'] == '1') || (!$is_signature && $pun_config['p_message_img_tag'] == '1'))
+	if ($pun_config['p_message_img_tag'] == '1')
 	{
 		$pattern[] = '#\[img\]((ht|f)tps?://)([^\s<"]*?)\[/img\]#e';
 		$pattern[] = '#\[img=([^\[]*?)\]((ht|f)tps?://)([^\s<"]*?)\[/img\]#e';
-		if ($is_signature)
-		{
-			$replace[] = 'handle_img_tag(\'$1$3\', true)';
-			$replace[] = 'handle_img_tag(\'$2$4\', true, \'$1\')';
-		}
-		else
-		{
-			$replace[] = 'handle_img_tag(\'$1$3\', false)';
-			$replace[] = 'handle_img_tag(\'$2$4\', false, \'$1\')';
-		}
+		$replace[] = 'handle_img_tag(\'$1$3\')';
+		$replace[] = 'handle_img_tag(\'$2$4\', \'$1\')';
 	}
 
 	$pattern[] = '#\[url\]([^\[]*?)\[/url\]#e';
@@ -857,37 +836,6 @@ function parse_message($text, $hide_smilies)
 			}
 		}
 	}
-
-	// Add paragraph tag around post, but make sure there are no empty paragraphs
-	$text = preg_replace('#<br />\s*?<br />((\s*<br />)*)#i', "</p>$1<p>", $text);
-	$text = str_replace('<p><br />', '<p>', $text);
-	$text = str_replace('<p></p>', '', '<p>'.$text.'</p>');
-
-	return $text;
-}
-
-
-//
-// Parse signature text
-//
-function parse_signature($text)
-{
-	global $pun_config, $lang_common, $pun_user;
-
-	// Convert applicable characters to HTML entities
-	$text = pun_htmlspecialchars($text);
-
-	if ($pun_config['p_sig_bbcode'] == '1' && strpos($text, '[') !== false && strpos($text, ']') !== false)
-		$text = do_bbcode($text, true);
-
-	if ($pun_config['o_smilies_sig'] == '1' && $pun_user['show_smilies'] == '1')
-		$text = do_smilies($text);
-
-
-	// Deal with newlines, tabs and multiple spaces
-	$pattern = array("\n", "\t", '  ', '  ');
-	$replace = array('<br />', '&#160; &#160; ', '&#160; ', ' &#160;');
-	$text = str_replace($pattern, $replace, $text);
 
 	// Add paragraph tag around post, but make sure there are no empty paragraphs
 	$text = preg_replace('#<br />\s*?<br />((\s*<br />)*)#i', "</p>$1<p>", $text);

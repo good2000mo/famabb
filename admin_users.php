@@ -202,7 +202,6 @@ if (isset($_GET['show_users']))
 					<td class="tc2"><a href="mailto:<?php echo $user_data['email'] ?>"><?php echo $user_data['email'] ?></a></td>
 					<td class="tc3"><?php echo $user_title ?></td>
 					<td class="tc4"><?php echo forum_number_format($user_data['num_posts']) ?></td>
-					<td class="tc5"><?php echo ($user_data['admin_note'] != '') ? pun_htmlspecialchars($user_data['admin_note']) : '&#160;' ?></td>
 					<td class="tcr"><?php echo $actions ?></td>
 				</tr>
 <?php
@@ -588,7 +587,7 @@ else if (isset($_GET['find_user']))
 	$like_command = ($db_type == 'pgsql') ? 'ILIKE' : 'LIKE';
 	foreach ($form as $key => $input)
 	{
-		if ($input != '' && in_array($key, array('username', 'email', 'title', 'realname', 'url', 'jabber', 'icq', 'msn', 'aim', 'yahoo', 'location', 'signature', 'admin_note')))
+		if ($input != '' && in_array($key, array('username', 'email', 'title')))
 		{
 			$conditions[] = 'u.'.$db->escape($key).' '.$like_command.' \''.$db->escape(str_replace('*', '%', $input)).'\'';
 			$query_str[] = 'form%5B'.$key.'%5D='.urlencode($input);
@@ -687,7 +686,6 @@ else if (isset($_GET['find_user']))
 					<td class="tc2"><a href="mailto:<?php echo $user_data['email'] ?>"><?php echo $user_data['email'] ?></a></td>
 					<td class="tc3"><?php echo $user_title ?></td>
 					<td class="tc4"><?php echo forum_number_format($user_data['num_posts']) ?></td>
-					<td class="tc5"><?php echo ($user_data['admin_note'] != '') ? pun_htmlspecialchars($user_data['admin_note']) : '&#160;' ?></td>
 					<td class="tcr"><?php echo $actions ?></td>
 <?php if ($can_action): ?>					<td class="tcmod"><input type="checkbox" name="users[<?php echo $user_data['id'] ?>]" value="1" /></td>
 <?php endif; ?> 
@@ -760,46 +758,6 @@ else
 								<tr>
 									<th scope="row"><?php echo $lang_admin_users['Title label'] ?></th>
 									<td><input type="text" name="form[title]" size="30" maxlength="50" tabindex="4" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Real name label'] ?></th>
-									<td><input type="text" name="form[realname]" size="30" maxlength="40" tabindex="5" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Website label'] ?></th>
-									<td><input type="text" name="form[url]" size="35" maxlength="100" tabindex="6" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Jabber label'] ?></th>
-									<td><input type="text" name="form[jabber]" size="30" maxlength="75" tabindex="7" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['ICQ label'] ?></th>
-									<td><input type="text" name="form[icq]" size="12" maxlength="12" tabindex="8" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['MSN label'] ?></th>
-									<td><input type="text" name="form[msn]" size="30" maxlength="50" tabindex="9" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['AOL label'] ?></th>
-									<td><input type="text" name="form[aim]" size="20" maxlength="20" tabindex="10" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Yahoo label'] ?></th>
-									<td><input type="text" name="form[yahoo]" size="20" maxlength="20" tabindex="11" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Location label'] ?></th>
-									<td><input type="text" name="form[location]" size="30" maxlength="30" tabindex="12" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Signature label'] ?></th>
-									<td><input type="text" name="form[signature]" size="35" maxlength="512" tabindex="13" /></td>
-								</tr>
-								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Admin note label'] ?></th>
-									<td><input type="text" name="form[admin_note]" size="30" maxlength="30" tabindex="14" /></td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_users['Posts more than label'] ?></th>

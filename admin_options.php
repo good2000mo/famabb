@@ -29,7 +29,6 @@ if (isset($_POST['form_sent']))
 		'board_desc'			=> pun_trim($_POST['form']['board_desc']),
 		'base_url'				=> pun_trim($_POST['form']['base_url']),
 		'default_timezone'		=> floatval($_POST['form']['default_timezone']),
-		'default_dst'			=> $_POST['form']['default_dst'] != '1' ? '0' : '1',
 		'default_lang'			=> pun_trim($_POST['form']['default_lang']),
 		'default_style'			=> pun_trim($_POST['form']['default_style']),
 		'time_format'			=> pun_trim($_POST['form']['time_format']),
@@ -49,7 +48,6 @@ if (isset($_POST['form_sent']))
 		'indent_num_spaces'		=> intval($_POST['form']['indent_num_spaces']),
 		'quote_depth'			=> intval($_POST['form']['quote_depth']),
 		'quickpost'				=> $_POST['form']['quickpost'] != '1' ? '0' : '1',
-		'signatures'			=> $_POST['form']['signatures'] != '1' ? '0' : '1',
 		'show_dot'				=> $_POST['form']['show_dot'] != '1' ? '0' : '1',
 		'topic_views'			=> $_POST['form']['topic_views'] != '1' ? '0' : '1',
 		'gzip'					=> $_POST['form']['gzip'] != '1' ? '0' : '1',
@@ -270,13 +268,6 @@ generate_admin_menu('options');
 									</td>
 								</tr>
 								<tr>
-									<th scope="row"><?php echo $lang_admin_options['DST label'] ?></th>
-									<td>
-										<input type="radio" name="form[default_dst]" value="1"<?php if ($pun_config['o_default_dst'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong>&#160;&#160;&#160;<input type="radio" name="form[default_dst]" value="0"<?php if ($pun_config['o_default_dst'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong>
-										<span><?php echo $lang_admin_options['DST help'] ?></span>
-									</td>
-								</tr>
-								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Language label'] ?></th>
 									<td>
 										<select name="form[default_lang]">
@@ -324,7 +315,7 @@ generate_admin_menu('options');
 				</div>
 <?php
 
-	$diff = ($pun_user['timezone'] + $pun_user['dst']) * 3600;
+	$diff = $pun_user['timezone'] * 3600;
 	$timestamp = time() + $diff;
 
 ?>
@@ -468,13 +459,6 @@ generate_admin_menu('options');
 									<td>
 										<input type="radio" name="form[quickpost]" value="1"<?php if ($pun_config['o_quickpost'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong>&#160;&#160;&#160;<input type="radio" name="form[quickpost]" value="0"<?php if ($pun_config['o_quickpost'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong>
 										<span><?php echo $lang_admin_options['Quick post help'] ?></span>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row"><a name="signatures"><?php echo $lang_admin_options['Signatures label'] ?></a></th>
-									<td>
-										<input type="radio" name="form[signatures]" value="1"<?php if ($pun_config['o_signatures'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong>&#160;&#160;&#160;<input type="radio" name="form[signatures]" value="0"<?php if ($pun_config['o_signatures'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong>
-										<span><?php echo $lang_admin_options['Signatures help'] ?></span>
 									</td>
 								</tr>
 								<tr>

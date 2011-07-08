@@ -634,7 +634,6 @@ else if (isset($_POST['form_sent']))
 		{
 			$form = array(
 				'timezone'		=> floatval($_POST['form']['timezone']),
-				'dst'			=> isset($_POST['form']['dst']) ? '1' : '0',
 				'time_format'	=> intval($_POST['form']['time_format']),
 				'date_format'	=> intval($_POST['form']['date_format']),
 			);
@@ -650,8 +649,6 @@ else if (isset($_POST['form_sent']))
 
 			if ($pun_user['is_admmod'])
 			{
-				$form['admin_note'] = pun_trim($_POST['admin_note']);
-
 				// Are we allowed to change usernames?
 				if ($pun_user['g_id'] == PUN_ADMIN || ($pun_user['g_moderator'] == '1' && $pun_user['g_mod_rename_users'] == '1'))
 				{
@@ -691,15 +688,7 @@ else if (isset($_POST['form_sent']))
 
 		case 'personal':
 		{
-			$form = array(
-				'realname'		=> pun_trim($_POST['form']['realname']),
-				'url'			=> pun_trim($_POST['form']['url']),
-				'location'		=> pun_trim($_POST['form']['location']),
-			);
-
-			// Add http:// if the URL doesn't contain it already (while allowing https://, too)
-			if ($form['url'] != '' && !preg_match('#^https?://#i', $form['url']))
-				$form['url'] = 'http://'.$form['url'];
+			$form = array();
 
 			if ($pun_user['g_id'] == PUN_ADMIN)
 				$form['title'] = pun_trim($_POST['title']);
@@ -721,53 +710,9 @@ else if (isset($_POST['form_sent']))
 			break;
 		}
 
-		case 'messaging':
-		{
-			$form = array(
-				'jabber'		=> pun_trim($_POST['form']['jabber']),
-				'icq'			=> pun_trim($_POST['form']['icq']),
-				'msn'			=> pun_trim($_POST['form']['msn']),
-				'aim'			=> pun_trim($_POST['form']['aim']),
-				'yahoo'			=> pun_trim($_POST['form']['yahoo']),
-			);
-
-			// If the ICQ UIN contains anything other than digits it's invalid
-			if (preg_match('/[^0-9]/', $form['icq']))
-				message($lang_prof_reg['Bad ICQ']);
-
-			break;
-		}
-
 		case 'personality':
 		{
 			$form = array();
-
-			// Clean up signature from POST
-			if ($pun_config['o_signatures'] == '1')
-			{
-				$form['signature'] = pun_linebreaks(pun_trim($_POST['signature']));
-
-				// Validate signature
-				if (pun_strlen($form['signature']) > $pun_config['p_sig_length'])
-					message(sprintf($lang_prof_reg['Sig too long'], $pun_config['p_sig_length'], pun_strlen($form['signature']) - $pun_config['p_sig_length']));
-				else if (substr_count($form['signature'], "\n") > ($pun_config['p_sig_lines']-1))
-					message(sprintf($lang_prof_reg['Sig too many lines'], $pun_config['p_sig_lines']));
-				else if ($form['signature'] && $pun_config['p_sig_all_caps'] == '0' && is_all_uppercase($form['signature']) && !$pun_user['is_admmod'])
-					$form['signature'] = utf8_ucwords(utf8_strtolower($form['signature']));
-
-				// Validate BBCode syntax
-				if ($pun_config['p_sig_bbcode'] == '1')
-				{
-					require PUN_ROOT.'include/parser.php';
-
-					$errors = array();
-
-					$form['signature'] = preparse_bbcode($form['signature'], $errors, true);
-
-					if(count($errors) > 0)
-						message('<ul><li>'.implode('</li><li>', $errors).'</li></ul>');
-				}
-			}
 
 			break;
 		}
@@ -779,9 +724,7 @@ else if (isset($_POST['form_sent']))
 				'disp_posts'		=> pun_trim($_POST['form']['disp_posts']),
 				'show_smilies'		=> isset($_POST['form']['show_smilies']) ? '1' : '0',
 				'show_img'			=> isset($_POST['form']['show_img']) ? '1' : '0',
-				'show_img_sig'		=> isset($_POST['form']['show_img_sig']) ? '1' : '0',
 				'show_avatars'		=> isset($_POST['form']['show_avatars']) ? '1' : '0',
-				'show_sig'			=> isset($_POST['form']['show_sig']) ? '1' : '0',
 			);
 
 			if ($form['disp_topics'] != '')
@@ -889,19 +832,13 @@ else if (isset($_POST['form_sent']))
 }
 
 
-$result = $db->query('SELECT u.username, u.email, u.title, u.realname, u.url, u.jabber, u.icq, u.msn, u.aim, u.yahoo, u.location, u.signature, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_img_sig, u.show_avatars, u.show_sig, u.timezone, u.dst, u.language, u.style, u.num_posts, u.last_post, u.registered, u.registration_ip, u.admin_note, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+$result = $db->query('SELECT u.username, u.email, u.title, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_avatars, u.timezone, u.language, u.style, u.num_posts, u.last_post, u.registered, u.registration_ip, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 if (!$db->num_rows($result))
 	message($lang_common['Bad request']);
 
 $user = $db->fetch_assoc($result);
 
 $last_post = format_time($user['last_post']);
-
-if ($user['signature'] != '')
-{
-	require PUN_ROOT.'include/parser.php';
-	$parsed_signature = parse_signature($user['signature']);
-}
 
 
 // View or edit?
@@ -921,25 +858,6 @@ if ($pun_user['id'] != $id &&																	// If we arent the user (i.e. edit
 	$user_personal[] = '<dt>'.$lang_common['Title'].'</dt>';
 	$user_personal[] = '<dd>'.$user_title_field.'</dd>';
 
-	if ($user['realname'] != '')
-	{
-		$user_personal[] = '<dt>'.$lang_profile['Realname'].'</dt>';
-		$user_personal[] = '<dd>'.pun_htmlspecialchars($user['realname']).'</dd>';
-	}
-
-	if ($user['location'] != '')
-	{
-		$user_personal[] = '<dt>'.$lang_profile['Location'].'</dt>';
-		$user_personal[] = '<dd>'.pun_htmlspecialchars($user['location']).'</dd>';
-	}
-
-	if ($user['url'] != '')
-	{
-		$user['url'] = pun_htmlspecialchars($user['url']);
-		$user_personal[] = '<dt>'.$lang_profile['Website'].'</dt>';
-		$user_personal[] = '<dd><span class="website"><a href="'.$user['url'].'">'.$user['url'].'</a></span></dd>';
-	}
-
 	if ($user['email_setting'] == '0' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
 		$email_field = '<a href="mailto:'.$user['email'].'">'.$user['email'].'</a>';
 	else if ($user['email_setting'] == '1' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
@@ -952,38 +870,6 @@ if ($pun_user['id'] != $id &&																	// If we arent the user (i.e. edit
 		$user_personal[] = '<dd><span class="email">'.$email_field.'</span></dd>';
 	}
 
-	$user_messaging = array();
-
-	if ($user['jabber'] != '')
-	{
-		$user_messaging[] = '<dt>'.$lang_profile['Jabber'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars($user['jabber']).'</dd>';
-	}
-
-	if ($user['icq'] != '')
-	{
-		$user_messaging[] = '<dt>'.$lang_profile['ICQ'].'</dt>';
-		$user_messaging[] = '<dd>'.$user['icq'].'</dd>';
-	}
-
-	if ($user['msn'] != '')
-	{
-		$user_messaging[] = '<dt>'.$lang_profile['MSN'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars($user['msn']).'</dd>';
-	}
-
-	if ($user['aim'] != '')
-	{
-		$user_messaging[] = '<dt>'.$lang_profile['AOL IM'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars($user['aim']).'</dd>';
-	}
-
-	if ($user['yahoo'] != '')
-	{
-		$user_messaging[] = '<dt>'.$lang_profile['Yahoo'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars($user['yahoo']).'</dd>';
-	}
-
 	$user_personality = array();
 
 	if ($pun_config['o_avatars'] == '1')
@@ -993,15 +879,6 @@ if ($pun_user['id'] != $id &&																	// If we arent the user (i.e. edit
 		{
 			$user_personality[] = '<dt>'.$lang_profile['Avatar'].'</dt>';
 			$user_personality[] = '<dd>'.$avatar_field.'</dd>';
-		}
-	}
-
-	if ($pun_config['o_signatures'] == '1')
-	{
-		if (isset($parsed_signature))
-		{
-			$user_personality[] = '<dt>'.$lang_profile['Signature'].'</dt>';
-			$user_personality[] = '<dd><div class="postsignature postmsg">'.$parsed_signature.'</div></dd>';
 		}
 	}
 
@@ -1058,18 +935,7 @@ if ($pun_user['id'] != $id &&																	// If we arent the user (i.e. edit
 					</div>
 				</fieldset>
 			</div>
-<?php if (!empty($user_messaging)): ?>			<div class="inform">
-				<fieldset>
-				<legend><?php echo $lang_profile['Section messaging'] ?></legend>
-					<div class="infldset">
-						<dl>
-							<?php echo implode("\n\t\t\t\t\t\t\t", $user_messaging)."\n" ?>
-						</dl>
-						<div class="clearer"></div>
-					</div>
-				</fieldset>
-			</div>
-<?php endif; if (!empty($user_personality)): ?>			<div class="inform">
+<?php if (!empty($user_personality)): ?>			<div class="inform">
 				<fieldset>
 				<legend><?php echo $lang_profile['Section personality'] ?></legend>
 					<div class="infldset">
@@ -1215,9 +1081,6 @@ else
 								<option value="14"<?php if ($user['timezone'] == 14) echo ' selected="selected"' ?>><?php echo $lang_prof_reg['UTC+14:00'] ?></option>
 							</select>
 							<br /></label>
-							<div class="rbox">
-								<label><input type="checkbox" name="form[dst]" value="1"<?php if ($user['dst'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['DST'] ?><br /></label>
-							</div>
 							<label><?php echo $lang_prof_reg['Time format'] ?>
 
 							<br /><select name="form[time_format]">
@@ -1293,9 +1156,7 @@ else
 							<p><?php printf($lang_profile['Last post info'], $last_post) ?></p>
 							<p><?php printf($lang_profile['Last visit info'], format_time($user['last_visit'])) ?></p>
 							<?php echo $posts_field ?>
-<?php if ($pun_user['is_admmod']): ?>							<label><?php echo $lang_profile['Admin note'] ?><br />
-							<input id="admin_note" type="text" name="admin_note" value="<?php echo pun_htmlspecialchars($user['admin_note']) ?>" size="30" maxlength="30" /><br /></label>
-<?php endif; ?>						</div>
+						</div>
 					</fieldset>
 				</div>
 				<p class="buttons"><input type="submit" name="update" value="<?php echo $lang_common['Submit'] ?>" /> <?php echo $lang_profile['Instructions'] ?></p>
@@ -1326,45 +1187,8 @@ else
 						<legend><?php echo $lang_profile['Personal details legend'] ?></legend>
 						<div class="infldset">
 							<input type="hidden" name="form_sent" value="1" />
-							<label><?php echo $lang_profile['Realname'] ?><br /><input type="text" name="form[realname]" value="<?php echo pun_htmlspecialchars($user['realname']) ?>" size="40" maxlength="40" /><br /></label>
 <?php if (isset($title_field)): ?>							<?php echo $title_field ?>
-<?php endif; ?>							<label><?php echo $lang_profile['Location'] ?><br /><input type="text" name="form[location]" value="<?php echo pun_htmlspecialchars($user['location']) ?>" size="30" maxlength="30" /><br /></label>
-							<label><?php echo $lang_profile['Website'] ?><br /><input type="text" name="form[url]" value="<?php echo pun_htmlspecialchars($user['url']) ?>" size="50" maxlength="80" /><br /></label>
-						</div>
-					</fieldset>
-				</div>
-				<p class="buttons"><input type="submit" name="update" value="<?php echo $lang_common['Submit'] ?>" /> <?php echo $lang_profile['Instructions'] ?></p>
-			</form>
-		</div>
-	</div>
-<?php
-
-	}
-	else if ($section == 'messaging')
-	{
-
-		$page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_common['Profile'], $lang_profile['Section messaging']);
-		define('PUN_ACTIVE_PAGE', 'profile');
-		require PUN_ROOT.'header.php';
-
-		generate_profile_menu('messaging');
-
-?>
-	<div class="blockform">
-		<h2><span><?php echo pun_htmlspecialchars($user['username']).' - '.$lang_profile['Section messaging'] ?></span></h2>
-		<div class="box">
-			<form id="profile3" method="post" action="profile.php?section=messaging&amp;id=<?php echo $id ?>">
-				<div class="inform">
-					<fieldset>
-						<legend><?php echo $lang_profile['Contact details legend'] ?></legend>
-						<div class="infldset">
-							<input type="hidden" name="form_sent" value="1" />
-							<label><?php echo $lang_profile['Jabber'] ?><br /><input id="jabber" type="text" name="form[jabber]" value="<?php echo pun_htmlspecialchars($user['jabber']) ?>" size="40" maxlength="75" /><br /></label>
-							<label><?php echo $lang_profile['ICQ'] ?><br /><input id="icq" type="text" name="form[icq]" value="<?php echo $user['icq'] ?>" size="12" maxlength="12" /><br /></label>
-							<label><?php echo $lang_profile['MSN'] ?><br /><input id="msn" type="text" name="form[msn]" value="<?php echo pun_htmlspecialchars($user['msn']) ?>" size="40" maxlength="50" /><br /></label>
-							<label><?php echo $lang_profile['AOL IM'] ?><br /><input id="aim" type="text" name="form[aim]" value="<?php echo pun_htmlspecialchars($user['aim']) ?>" size="20" maxlength="30" /><br /></label>
-							<label><?php echo $lang_profile['Yahoo'] ?><br /><input id="yahoo" type="text" name="form[yahoo]" value="<?php echo pun_htmlspecialchars($user['yahoo']) ?>" size="20" maxlength="30" /><br /></label>
-						</div>
+<?php endif; ?>						</div>
 					</fieldset>
 				</div>
 				<p class="buttons"><input type="submit" name="update" value="<?php echo $lang_common['Submit'] ?>" /> <?php echo $lang_profile['Instructions'] ?></p>
@@ -1376,7 +1200,7 @@ else
 	}
 	else if ($section == 'personality')
 	{
-		if ($pun_config['o_avatars'] == '0' && $pun_config['o_signatures'] == '0')
+		if ($pun_config['o_avatars'] == '0')
 			message($lang_common['Bad request']);
 
 		$avatar_field = '<span><a href="profile.php?action=upload_avatar&amp;id='.$id.'">'.$lang_profile['Change avatar'].'</a></span>';
@@ -1386,11 +1210,6 @@ else
 			$avatar_field .= ' <span><a href="profile.php?action=delete_avatar&amp;id='.$id.'">'.$lang_profile['Delete avatar'].'</a></span>';
 		else
 			$avatar_field = '<span><a href="profile.php?action=upload_avatar&amp;id='.$id.'">'.$lang_profile['Upload avatar'].'</a></span>';
-
-		if ($user['signature'] != '')
-			$signature_preview = '<p>'.$lang_profile['Sig preview'].'</p>'."\n\t\t\t\t\t\t\t".'<div class="postsignature postmsg">'."\n\t\t\t\t\t\t\t\t".'<hr />'."\n\t\t\t\t\t\t\t\t".$parsed_signature."\n\t\t\t\t\t\t\t".'</div>'."\n";
-		else
-			$signature_preview = '<p>'.$lang_profile['No sig'].'</p>'."\n";
 
 		$page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_common['Profile'], $lang_profile['Section personality']);
 		define('PUN_ACTIVE_PAGE', 'profile');
@@ -1412,24 +1231,6 @@ else
 <?php if ($user_avatar): ?>							<div class="useravatar"><?php echo $user_avatar ?></div>
 <?php endif; ?>							<p><?php echo $lang_profile['Avatar info'] ?></p>
 							<p class="clearb actions"><?php echo $avatar_field ?></p>
-						</div>
-					</fieldset>
-				</div>
-<?php endif; if ($pun_config['o_signatures'] == '1'): ?>				<div class="inform">
-					<fieldset>
-						<legend><?php echo $lang_profile['Signature legend'] ?></legend>
-						<div class="infldset">
-							<p><?php echo $lang_profile['Signature info'] ?></p>
-							<div class="txtarea">
-								<label><?php printf($lang_profile['Sig max size'], forum_number_format($pun_config['p_sig_length']), $pun_config['p_sig_lines']) ?><br />
-								<textarea name="signature" rows="4" cols="65"><?php echo pun_htmlspecialchars($user['signature']) ?></textarea><br /></label>
-							</div>
-							<ul class="bblinks">
-								<li><span><a href="help.php#bbcode" onclick="window.open(this.href); return false;"><?php echo $lang_common['BBCode'] ?></a> <?php echo ($pun_config['p_sig_bbcode'] == '1') ? $lang_common['on'] : $lang_common['off']; ?></span></li>
-								<li><span><a href="help.php#img" onclick="window.open(this.href); return false;"><?php echo $lang_common['img tag'] ?></a> <?php echo ($pun_config['p_sig_bbcode'] == '1' && $pun_config['p_sig_img_tag'] == '1') ? $lang_common['on'] : $lang_common['off']; ?></span></li>
-								<li><span><a href="help.php#smilies" onclick="window.open(this.href); return false;"><?php echo $lang_common['Smilies'] ?></a> <?php echo ($pun_config['o_smilies_sig'] == '1') ? $lang_common['on'] : $lang_common['off']; ?></span></li>
-							</ul>
-							<?php echo $signature_preview ?>
 						</div>
 					</fieldset>
 				</div>
@@ -1492,18 +1293,16 @@ else
 		}
 
 ?>
-<?php if ($pun_config['o_smilies'] == '1' || $pun_config['o_smilies_sig'] == '1' || $pun_config['o_signatures'] == '1' || $pun_config['o_avatars'] == '1' || ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1')): ?>
+<?php if ($pun_config['o_smilies'] == '1' || $pun_config['o_avatars'] == '1' || ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1')): ?>
 				<div class="inform">
 					<fieldset>
 						<legend><?php echo $lang_profile['Post display legend'] ?></legend>
 						<div class="infldset">
 							<p><?php echo $lang_profile['Post display info'] ?></p>
 							<div class="rbox">
-<?php if ($pun_config['o_smilies'] == '1' || $pun_config['o_smilies_sig'] == '1'): ?>								<label><input type="checkbox" name="form[show_smilies]" value="1"<?php if ($user['show_smilies'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show smilies'] ?><br /></label>
-<?php endif; if ($pun_config['o_signatures'] == '1'): ?>								<label><input type="checkbox" name="form[show_sig]" value="1"<?php if ($user['show_sig'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show sigs'] ?><br /></label>
+<?php if ($pun_config['o_smilies'] == '1'): ?>								<label><input type="checkbox" name="form[show_smilies]" value="1"<?php if ($user['show_smilies'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show smilies'] ?><br /></label>
 <?php endif; if ($pun_config['o_avatars'] == '1'): ?>								<label><input type="checkbox" name="form[show_avatars]" value="1"<?php if ($user['show_avatars'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show avatars'] ?><br /></label>
 <?php endif; if ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img]" value="1"<?php if ($user['show_img'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show images'] ?><br /></label>
-<?php endif; if ($pun_config['o_signatures'] == '1' && $pun_config['p_sig_bbcode'] == '1' && $pun_config['p_sig_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img_sig]" value="1"<?php if ($user['show_img_sig'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show images sigs'] ?><br /></label>
 <?php endif; ?>
 							</div>
 						</div>
