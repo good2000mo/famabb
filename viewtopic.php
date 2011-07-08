@@ -193,7 +193,6 @@ while ($cur_post = $db->fetch_assoc($result))
 	$user_info = array();
 	$user_contacts = array();
 	$post_actions = array();
-	$is_online = '';
 
 	// If the poster is a registered user
 	if ($cur_post['poster_id'] > 1)
@@ -204,9 +203,6 @@ while ($cur_post = $db->fetch_assoc($result))
 			$username = pun_htmlspecialchars($cur_post['username']);
 
 		$user_title = get_title($cur_post);
-
-		// Format the online indicator
-		$is_online = ($cur_post['is_online'] == $cur_post['poster_id']) ? '<strong>'.$lang_topic['Online'].'</strong>' : '<span>'.$lang_topic['Offline'].'</span>';
 
 		if ($pun_config['o_avatars'] == '1' && $pun_user['show_avatars'] != '0')
 		{
@@ -235,16 +231,12 @@ while ($cur_post = $db->fetch_assoc($result))
 				if ($pun_user['g_edit_posts'] == '1')
 					$post_actions[] = '<li class="postedit"><span><a href="edit.php?id='.$cur_post['id'].'">'.$lang_topic['Edit'].'</a></span></li>';
 			}
-
-			if (($cur_topic['post_replies'] == '' && $pun_user['g_post_replies'] == '1') || $cur_topic['post_replies'] == '1')
-				$post_actions[] = '<li class="postquote"><span><a href="post.php?tid='.$id.'&amp;qid='.$cur_post['id'].'">'.$lang_topic['Quote'].'</a></span></li>';
 		}
 	}
 	else
 	{
 		$post_actions[] = '<li class="postdelete"><span><a href="delete.php?id='.$cur_post['id'].'">'.$lang_topic['Delete'].'</a></span></li>';
 		$post_actions[] = '<li class="postedit"><span><a href="edit.php?id='.$cur_post['id'].'">'.$lang_topic['Edit'].'</a></span></li>';
-		$post_actions[] = '<li class="postquote"><span><a href="post.php?tid='.$id.'&amp;qid='.$cur_post['id'].'">'.$lang_topic['Quote'].'</a></span></li>';
 	}
 
 	// Perform the main parsing of the message (BBCode, smilies etc)
