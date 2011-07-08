@@ -885,8 +885,7 @@ if ($pun_user['id'] != $id &&																	// If we arent the user (i.e. edit
 	$user_activity = array();
 
 	$posts_field = '';
-	if ($pun_config['o_show_post_count'] == '1' || $pun_user['is_admmod'])
-		$posts_field = forum_number_format($user['num_posts']);
+	$posts_field = forum_number_format($user['num_posts']);
 	if ($pun_user['g_search'] == '1')
 	{
 		$quick_searches = array();
@@ -988,10 +987,7 @@ else
 		$posts_field = '';
 		$posts_actions = array();
 
-		if ($pun_user['g_id'] == PUN_ADMIN)
-			$posts_field .= '<label>'.$lang_common['Posts'].'<br /><input type="text" name="num_posts" value="'.$user['num_posts'].'" size="8" maxlength="8" /><br /></label>';
-		else if ($pun_config['o_show_post_count'] == '1' || $pun_user['is_admmod'])
-			$posts_actions[] = sprintf($lang_profile['Posts info'], forum_number_format($user['num_posts']));
+		$posts_actions[] = sprintf($lang_profile['Posts info'], forum_number_format($user['num_posts']));
 
 		if ($pun_user['g_search'] == '1' || $pun_user['g_id'] == PUN_ADMIN)
 		{
