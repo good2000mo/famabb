@@ -123,32 +123,10 @@ generate_admin_menu('index');
 
 ?>
 	<div class="block">
-		<h2><span><?php echo $lang_admin_index['Forum admin head'] ?></span></h2>
-		<div id="adintro" class="box">
-			<div class="inbox">
-				<p><?php echo $lang_admin_index['Welcome to admin'] ?></p>
-				<ul>
-					<li><span><?php echo $lang_admin_index['Welcome 1'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 2'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 3'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 4'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 5'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 6'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 7'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 8'] ?></span></li>
-					<li><span><?php echo $lang_admin_index['Welcome 9'] ?></span></li>
-				</ul>
-			</div>
-		</div>
-
 		<h2 class="block2"><span><?php echo $lang_admin_index['Statistics head'] ?></span></h2>
 		<div id="adstats" class="box">
 			<div class="inbox">
 				<dl>
-					<dt><?php echo $lang_admin_index['FluxBB version label'] ?></dt>
-					<dd>
-						<?php printf($lang_admin_index['FluxBB version data'], $pun_config['o_cur_version'], '<a href="admin_index.php?action=check_upgrade">'.$lang_admin_index['Check for upgrade'].'</a>') ?>
-					</dd>
 					<dt><?php echo $lang_admin_index['Server load label'] ?></dt>
 					<dd>
 						<?php printf($lang_admin_index['Server load data'], $server_load, $num_online) ?>
