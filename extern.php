@@ -127,11 +127,6 @@ function output_rss($feed)
 	echo "\t\t".'<description><![CDATA['.escape_cdata($feed['description']).']]></description>'."\n";
 	echo "\t\t".'<lastBuildDate>'.gmdate('r', count($feed['items']) ? $feed['items'][0]['pubdate'] : time()).'</lastBuildDate>'."\n";
 
-	if ($pun_config['o_show_version'] == '1')
-		echo "\t\t".'<generator>FluxBB '.$pun_config['o_cur_version'].'</generator>'."\n";
-	else
-		echo "\t\t".'<generator>FluxBB</generator>'."\n";
-
 	foreach ($feed['items'] as $item)
 	{
 		echo "\t\t".'<item>'."\n";
@@ -170,11 +165,6 @@ function output_atom($feed)
 	echo "\t".'<link rel="self" href="'.pun_htmlspecialchars(get_current_url()).'"/>'."\n";
 	echo "\t".'<link href="'.pun_htmlspecialchars($feed['link']).'"/>'."\n";
 	echo "\t".'<updated>'.gmdate('Y-m-d\TH:i:s\Z', count($feed['items']) ? $feed['items'][0]['pubdate'] : time()).'</updated>'."\n";
-
-	if ($pun_config['o_show_version'] == '1')
-		echo "\t".'<generator version="'.$pun_config['o_cur_version'].'">FluxBB</generator>'."\n";
-	else
-		echo "\t".'<generator>FluxBB</generator>'."\n";
 
 	echo "\t".'<id>'.pun_htmlspecialchars($feed['link']).'</id>'."\n";
 
