@@ -38,27 +38,6 @@ if (!defined('PUN'))
 %iex' */
 $re_list = '%\[list(?:=([1a*]))?+\]((?:[^\[]*+(?:(?!\[list(?:=[1a*])?+\]|\[/list\])\[[^\[]*+)*+|(?R))*)\[/list\]%ie';
 
-// Here you can add additional smilies if you like (please note that you must escape single quote and backslash)
-$smilies = array(
-	':)' => 'smile.png',
-	'=)' => 'smile.png',
-	':|' => 'neutral.png',
-	'=|' => 'neutral.png',
-	':(' => 'sad.png',
-	'=(' => 'sad.png',
-	':D' => 'big_smile.png',
-	'=D' => 'big_smile.png',
-	':o' => 'yikes.png',
-	':O' => 'yikes.png',
-	';)' => 'wink.png',
-	':/' => 'hmm.png',
-	':P' => 'tongue.png',
-	':p' => 'tongue.png',
-	':lol:' => 'lol.png',
-	':mad:' => 'mad.png',
-	':rolleyes:' => 'roll.png',
-	':cool:' => 'cool.png');
-
 //
 // Make sure all BBCodes are lower case and do a little cleanup
 //
@@ -771,28 +750,9 @@ function do_clickable($text)
 
 
 //
-// Convert a series of smilies to images
-//
-function do_smilies($text)
-{
-	global $pun_config, $smilies;
-
-	$text = ' '.$text.' ';
-
-	foreach ($smilies as $smiley_text => $smiley_img)
-	{
-		if (strpos($text, $smiley_text) !== false)
-			$text = ucp_preg_replace('#(?<=[>\s])'.preg_quote($smiley_text, '#').'(?=[^\p{L}\p{N}])#um', '<img src="'.pun_htmlspecialchars(get_base_url(true).'/img/smilies/'.$smiley_img).'" width="15" height="15" alt="'.substr($smiley_img, 0, strrpos($smiley_img, '.')).'" />', $text);
-	}
-
-	return substr($text, 1, -1);
-}
-
-
-//
 // Parse message text
 //
-function parse_message($text, $hide_smilies)
+function parse_message($text)
 {
 	global $pun_config, $lang_common, $pun_user;
 
@@ -808,9 +768,6 @@ function parse_message($text, $hide_smilies)
 
 	if ($pun_config['p_message_bbcode'] == '1' && strpos($text, '[') !== false && strpos($text, ']') !== false)
 		$text = do_bbcode($text);
-
-	if ($pun_config['o_smilies'] == '1' && $pun_user['show_smilies'] == '1' && $hide_smilies == '0')
-		$text = do_smilies($text);
 
 	// Deal with newlines, tabs and multiple spaces
 	$pattern = array("\n", "\t", '  ', '  ');

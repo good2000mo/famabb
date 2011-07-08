@@ -722,7 +722,6 @@ else if (isset($_POST['form_sent']))
 			$form = array(
 				'disp_topics'		=> pun_trim($_POST['form']['disp_topics']),
 				'disp_posts'		=> pun_trim($_POST['form']['disp_posts']),
-				'show_smilies'		=> isset($_POST['form']['show_smilies']) ? '1' : '0',
 				'show_img'			=> isset($_POST['form']['show_img']) ? '1' : '0',
 				'show_avatars'		=> isset($_POST['form']['show_avatars']) ? '1' : '0',
 			);
@@ -832,7 +831,7 @@ else if (isset($_POST['form_sent']))
 }
 
 
-$result = $db->query('SELECT u.username, u.email, u.title, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_avatars, u.timezone, u.language, u.style, u.num_posts, u.last_post, u.registered, u.registration_ip, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+$result = $db->query('SELECT u.username, u.email, u.title, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_img, u.show_avatars, u.timezone, u.language, u.style, u.num_posts, u.last_post, u.registered, u.registration_ip, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 if (!$db->num_rows($result))
 	message($lang_common['Bad request']);
 
@@ -1289,15 +1288,14 @@ else
 		}
 
 ?>
-<?php if ($pun_config['o_smilies'] == '1' || $pun_config['o_avatars'] == '1' || ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1')): ?>
+<?php if ($pun_config['o_avatars'] == '1' || ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1')): ?>
 				<div class="inform">
 					<fieldset>
 						<legend><?php echo $lang_profile['Post display legend'] ?></legend>
 						<div class="infldset">
 							<p><?php echo $lang_profile['Post display info'] ?></p>
 							<div class="rbox">
-<?php if ($pun_config['o_smilies'] == '1'): ?>								<label><input type="checkbox" name="form[show_smilies]" value="1"<?php if ($user['show_smilies'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show smilies'] ?><br /></label>
-<?php endif; if ($pun_config['o_avatars'] == '1'): ?>								<label><input type="checkbox" name="form[show_avatars]" value="1"<?php if ($user['show_avatars'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show avatars'] ?><br /></label>
+<?php if ($pun_config['o_avatars'] == '1'): ?>								<label><input type="checkbox" name="form[show_avatars]" value="1"<?php if ($user['show_avatars'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show avatars'] ?><br /></label>
 <?php endif; if ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img]" value="1"<?php if ($user['show_img'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show images'] ?><br /></label>
 <?php endif; ?>
 							</div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 08, 2011, 04:33 PM
+-- 建立日期: Jul 08, 2011, 06:59 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -212,7 +212,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1310113899, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1310122137, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -227,7 +227,6 @@ CREATE TABLE `fbb_posts` (
   `poster_ip` varchar(39) default NULL,
   `poster_email` varchar(80) default NULL,
   `message` mediumtext,
-  `hide_smilies` tinyint(1) NOT NULL default '0',
   `posted` int(10) unsigned NOT NULL default '0',
   `edited` int(10) unsigned default NULL,
   `edited_by` varchar(200) default NULL,
@@ -241,7 +240,7 @@ CREATE TABLE `fbb_posts` (
 -- 列出以下資料庫的數據： `fbb_posts`
 -- 
 
-INSERT INTO `fbb_posts` VALUES (1, 'admin', 2, '127.0.0.1', NULL, '如果您在閱讀這個文章(我猜正是如此)，安裝的 FluxBB 已經開始工作！現在您可以登錄，並進入頂部的管理設置面板來配置您的論壇。', 0, 1309485691, NULL, NULL, 1);
+INSERT INTO `fbb_posts` VALUES (1, 'admin', 2, '127.0.0.1', NULL, '如果您在閱讀這個文章(我猜正是如此)，安裝的 FluxBB 已經開始工作！現在您可以登錄，並進入頂部的管理設置面板來配置您的論壇。', 1309485691, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -341,7 +340,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 45, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 47, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -361,7 +360,6 @@ CREATE TABLE `fbb_users` (
   `email_setting` tinyint(1) NOT NULL default '1',
   `notify_with_post` tinyint(1) NOT NULL default '0',
   `auto_notify` tinyint(1) NOT NULL default '0',
-  `show_smilies` tinyint(1) NOT NULL default '1',
   `show_img` tinyint(1) NOT NULL default '1',
   `show_avatars` tinyint(1) NOT NULL default '1',
   `timezone` float NOT NULL default '0',
@@ -387,5 +385,5 @@ CREATE TABLE `fbb_users` (
 -- 列出以下資料庫的數據： `fbb_users`
 -- 
 
-INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 1, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310105786, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310114865, NULL, NULL);
