@@ -143,7 +143,6 @@ if ($db->num_rows($result))
 		++$topic_count;
 		$status_text = array();
 		$item_status = ($topic_count % 2 == 0) ? 'roweven' : 'rowodd';
-		$icon_type = 'icon';
 
 		if ($cur_topic['sticky'] == '1')
 		{
@@ -181,7 +180,6 @@ if ($db->num_rows($result))
 
 ?>
 				<li class="<?php echo $item_status ?>">
-					<div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo forum_number_format($topic_count + $start_from) ?></div></div>
 					<div class="tclcon">
 						<div>
 							<?php echo $subject."\n" ?>
@@ -197,7 +195,6 @@ else
 
 ?>
 				<li class="rowodd inone">
-					<div class="icon inone"><div class="nosize"><!-- --></div></div>
 					<div class="tclcon">
 						<div>
 							<strong><?php echo $lang_forum['Empty forum'] ?></strong>

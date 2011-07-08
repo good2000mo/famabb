@@ -54,7 +54,6 @@ while ($cur_forum = $db->fetch_assoc($result))
 	++$forum_count;
 	$item_status = ($forum_count % 2 == 0) ? 'roweven' : 'rowodd';
 	$forum_field_new = '';
-	$icon_type = 'icon';
 
 	$forum_field = '<h3><a href="viewboard.php?id='.$cur_forum['fid'].'">'.pun_htmlspecialchars($cur_forum['forum_name']).'</a>'.(!empty($forum_field_new) ? ' '.$forum_field_new : '').'</h3>';
 
@@ -79,7 +78,6 @@ while ($cur_forum = $db->fetch_assoc($result))
 
 ?>
 				<li class="<?php echo $item_status ?>">
-					<div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo forum_number_format($forum_count) ?></div></div>
 					<div class="tclcon">
 						<div>
 							<?php echo $forum_field."\n".$moderators ?>

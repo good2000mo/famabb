@@ -566,9 +566,7 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 			if ($show_as == 'posts')
 			{
 				++$post_count;
-				$icon_type = 'icon';
 				$item_status = '';
-				$icon_text = '<!-- -->';
 
 				$message = parse_message($cur_search['message'], $cur_search['hide_smilies']);
 				$pposter = pun_htmlspecialchars($cur_search['pposter']);
@@ -593,7 +591,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 						<dt><?php echo $pposter ?></dt>
 <?php if ($cur_search['pid'] == $cur_search['first_post_id']) : ?>						<dd><span><?php echo $lang_topic['Replies'].' '.forum_number_format($cur_search['num_replies']) ?></span></dd>
 <?php endif; ?>
-						<dd><div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo $icon_text ?></div></div></dd>
 					</dl>
 				</div>
 				<div class="postright">
@@ -624,7 +621,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 				++$topic_count;
 				$status_text = array();
 				$item_status = ($topic_count % 2 == 0) ? 'roweven' : 'rowodd';
-				$icon_type = 'icon';
 
 				$subject = '<a href="viewtopic.php?id='.$cur_search['tid'].'">'.pun_htmlspecialchars($cur_search['subject']).'</a> <span class="byuser">'.$lang_common['by'].' '.pun_htmlspecialchars($cur_search['poster']).'</span>';
 
@@ -646,7 +642,6 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 ?>
 				<tr class="<?php echo $item_status ?>">
 					<td class="tcl">
-						<div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo forum_number_format($topic_count + $start_from) ?></div></div>
 						<div class="tclcon">
 							<div>
 								<?php echo $subject."\n" ?>

@@ -854,7 +854,6 @@ if ($db->num_rows($result))
 		++$topic_count;
 		$status_text = array();
 		$item_status = ($topic_count % 2 == 0) ? 'roweven' : 'rowodd';
-		$icon_type = 'icon';
 
 		if ($cur_topic['moved_to'] == null)
 		{
@@ -894,7 +893,6 @@ if ($db->num_rows($result))
 ?>
 				<tr class="<?php echo $item_status ?>">
 					<td class="tcl">
-						<div class="<?php echo $icon_type ?>"><div class="nosize"><?php echo forum_number_format($topic_count + $start_from) ?></div></div>
 						<div class="tclcon">
 							<div>
 								<?php echo $subject."\n" ?>
