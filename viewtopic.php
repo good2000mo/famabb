@@ -215,30 +215,12 @@ while ($cur_post = $db->fetch_assoc($result))
 			else
 				$user_avatar = $user_avatar_cache[$cur_post['poster_id']] = generate_avatar_markup($cur_post['poster_id']);
 		}
-
-		// We only show location, register date, post count and the contact links if "Show user info" is enabled
-		if ($pun_config['o_show_user_info'] == '1')
-		{
-			$user_info[] = '<dd><span>'.$lang_topic['Registered'].' '.format_time($cur_post['registered'], true).'</span></dd>';
-
-			if ($pun_config['o_show_post_count'] == '1' || $pun_user['is_admmod'])
-				$user_info[] = '<dd><span>'.$lang_topic['Posts'].' '.forum_number_format($cur_post['num_posts']).'</span></dd>';
-
-			// Now let's deal with the contact links (Email and URL)
-			if ((($cur_post['email_setting'] == '0' && !$pun_user['is_guest']) || $pun_user['is_admmod']) && $pun_user['g_send_email'] == '1')
-				$user_contacts[] = '<span class="email"><a href="mailto:'.$cur_post['email'].'">'.$lang_common['Email'].'</a></span>';
-			else if ($cur_post['email_setting'] == '1' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
-				$user_contacts[] = '<span class="email"><a href="misc.php?email='.$cur_post['poster_id'].'">'.$lang_common['Email'].'</a></span>';
-		}
 	}
 	// If the poster is a guest (or a user that has been deleted)
 	else
 	{
 		$username = pun_htmlspecialchars($cur_post['username']);
 		$user_title = get_title($cur_post);
-
-		if ($pun_config['o_show_user_info'] == '1' && $cur_post['poster_email'] != '' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
-			$user_contacts[] = '<span class="email"><a href="mailto:'.$cur_post['poster_email'].'">'.$lang_common['Email'].'</a></span>';
 	}
 
 	// Generation post action array (quote, edit, delete etc.)

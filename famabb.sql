@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 08, 2011, 04:03 PM
+-- 建立日期: Jul 08, 2011, 04:24 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -60,7 +60,6 @@ INSERT INTO `fbb_config` VALUES ('o_date_format', 'Y-m-d');
 INSERT INTO `fbb_config` VALUES ('o_timeout_visit', '1800');
 INSERT INTO `fbb_config` VALUES ('o_timeout_online', '300');
 INSERT INTO `fbb_config` VALUES ('o_redirect_delay', '1');
-INSERT INTO `fbb_config` VALUES ('o_show_user_info', '1');
 INSERT INTO `fbb_config` VALUES ('o_show_post_count', '1');
 INSERT INTO `fbb_config` VALUES ('o_smilies', '1');
 INSERT INTO `fbb_config` VALUES ('o_make_links', '1');
@@ -214,7 +213,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1310111897, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1310113246, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -343,7 +342,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 38, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 39, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
