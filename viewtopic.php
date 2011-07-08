@@ -230,20 +230,12 @@ while ($cur_post = $db->fetch_assoc($result))
 			else if ($cur_post['email_setting'] == '1' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
 				$user_contacts[] = '<span class="email"><a href="misc.php?email='.$cur_post['poster_id'].'">'.$lang_common['Email'].'</a></span>';
 		}
-
-		if ($pun_user['is_admmod'])
-		{
-			$user_info[] = '<dd><span><a href="moderate.php?get_host='.$cur_post['id'].'" title="'.$cur_post['poster_ip'].'">'.$lang_topic['IP address logged'].'</a></span></dd>';
-		}
 	}
 	// If the poster is a guest (or a user that has been deleted)
 	else
 	{
 		$username = pun_htmlspecialchars($cur_post['username']);
 		$user_title = get_title($cur_post);
-
-		if ($pun_user['is_admmod'])
-			$user_info[] = '<dd><span><a href="moderate.php?get_host='.$cur_post['id'].'" title="'.$cur_post['poster_ip'].'">'.$lang_topic['IP address logged'].'</a></span></dd>';
 
 		if ($pun_config['o_show_user_info'] == '1' && $cur_post['poster_email'] != '' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
 			$user_contacts[] = '<span class="email"><a href="mailto:'.$cur_post['poster_email'].'">'.$lang_common['Email'].'</a></span>';

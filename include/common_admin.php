@@ -38,7 +38,6 @@ function generate_admin_menu($page = '')
 			<div class="inbox">
 				<ul>
 					<li<?php if ($page == 'index') echo ' class="isactive"'; ?>><a href="admin_index.php"><?php echo $lang_admin_common['Index'] ?></a></li>
-					<li<?php if ($page == 'users') echo ' class="isactive"'; ?>><a href="admin_users.php"><?php echo $lang_admin_common['Users'] ?></a></li>
 				</ul>
 			</div>
 		</div>
