@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 08, 2011, 06:59 PM
+-- 建立日期: Jul 08, 2011, 07:49 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -76,11 +76,6 @@ INSERT INTO `fbb_config` VALUES ('o_topic_views', '1');
 INSERT INTO `fbb_config` VALUES ('o_gzip', '0');
 INSERT INTO `fbb_config` VALUES ('o_additional_navlinks', '');
 INSERT INTO `fbb_config` VALUES ('o_default_email_setting', '1');
-INSERT INTO `fbb_config` VALUES ('o_avatars', '1');
-INSERT INTO `fbb_config` VALUES ('o_avatars_dir', 'img/avatars');
-INSERT INTO `fbb_config` VALUES ('o_avatars_width', '60');
-INSERT INTO `fbb_config` VALUES ('o_avatars_height', '60');
-INSERT INTO `fbb_config` VALUES ('o_avatars_size', '10240');
 INSERT INTO `fbb_config` VALUES ('o_search_all_forums', '1');
 INSERT INTO `fbb_config` VALUES ('o_admin_email', 'comus2010mo@hotmail.com');
 INSERT INTO `fbb_config` VALUES ('o_webmaster_email', 'comus2010mo@hotmail.com');
@@ -212,7 +207,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1310122137, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1310125750, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -340,7 +335,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 47, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 51, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -361,7 +356,6 @@ CREATE TABLE `fbb_users` (
   `notify_with_post` tinyint(1) NOT NULL default '0',
   `auto_notify` tinyint(1) NOT NULL default '0',
   `show_img` tinyint(1) NOT NULL default '1',
-  `show_avatars` tinyint(1) NOT NULL default '1',
   `timezone` float NOT NULL default '0',
   `time_format` tinyint(1) NOT NULL default '0',
   `date_format` tinyint(1) NOT NULL default '0',
@@ -385,5 +379,5 @@ CREATE TABLE `fbb_users` (
 -- 列出以下資料庫的數據： `fbb_users`
 -- 
 
-INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 1, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310114865, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 0, 0, 0, 'English', 'Air', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 8, 0, 0, 'Traditional_Chinese', 'Lithium', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310123608, NULL, NULL);

@@ -120,26 +120,6 @@ require PUN_ROOT.'header.php';
 		<p><code>[b][u]<?php echo $lang_help['Bold, underlined text'] ?>[/u][/b]</code> <?php echo $lang_help['produces'] ?> <samp><strong><span class="bbu"><?php echo $lang_help['Bold, underlined text'] ?></span></strong></samp></p>
 	</div>
 </div>
-<h2><span><?php echo $lang_help['Smilies'] ?></span></h2>
-<div class="box">
-	<div class="inbox">
-		<p><a name="smilies"></a><?php echo $lang_help['Smilies info'] ?></p>
-<?php
-
-// Display the smiley set
-require PUN_ROOT.'include/parser.php';
-
-$smiley_groups = array();
-
-foreach ($smilies as $smiley_text => $smiley_img)
-	$smiley_groups[$smiley_img][] = $smiley_text;
-
-foreach ($smiley_groups as $smiley_img => $smiley_texts)
-	echo "\t\t".'<p><code>'.implode('</code> '.$lang_common['and'].' <code>', $smiley_texts).'</code> <span>'.$lang_help['produces'].'</span> <samp><img src="'.pun_htmlspecialchars(get_base_url(true)).'/img/smilies/'.$smiley_img.'" width="15" height="15" alt="'.$smiley_texts[0].'" /></samp></p>'."\n";
-
-?>
-	</div>
-</div>
 <?php
 
 require PUN_ROOT.'footer.php';
