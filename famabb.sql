@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 -- 
 -- 主機: localhost
--- 建立日期: Jul 08, 2011, 09:55 PM
+-- 建立日期: Jul 10, 2011, 12:34 PM
 -- 伺服器版本: 5.0.51
 -- PHP 版本: 5.2.6
 
@@ -48,10 +48,6 @@ CREATE TABLE `fbb_config` (
 -- 列出以下資料庫的數據： `fbb_config`
 -- 
 
-INSERT INTO `fbb_config` VALUES ('o_cur_version', '1.4.5');
-INSERT INTO `fbb_config` VALUES ('o_database_revision', '11');
-INSERT INTO `fbb_config` VALUES ('o_searchindex_revision', '2');
-INSERT INTO `fbb_config` VALUES ('o_parser_revision', '2');
 INSERT INTO `fbb_config` VALUES ('o_board_title', 'FamaBB');
 INSERT INTO `fbb_config` VALUES ('o_board_desc', '<p><span>這是我們應該做的.</span></p>');
 INSERT INTO `fbb_config` VALUES ('o_default_timezone', '8');
@@ -206,7 +202,7 @@ CREATE TABLE `fbb_online` (
 -- 列出以下資料庫的數據： `fbb_online`
 -- 
 
-INSERT INTO `fbb_online` VALUES (2, 'admin', 1310131707, 0, NULL, NULL);
+INSERT INTO `fbb_online` VALUES (2, 'admin', 1310181981, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -334,7 +330,7 @@ CREATE TABLE `fbb_topics` (
 -- 列出以下資料庫的數據： `fbb_topics`
 -- 
 
-INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 51, 0, 0, 0, NULL, 1);
+INSERT INTO `fbb_topics` VALUES (1, 'admin', '示例文章', 1309485691, 1, 1309485691, 1, 'admin', 52, 0, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -378,4 +374,4 @@ CREATE TABLE `fbb_users` (
 -- 
 
 INSERT INTO `fbb_users` VALUES (1, 3, '訪客', '訪客', '訪客', NULL, NULL, NULL, 1, 0, 0, 1, 0, 0, 0, 'English', 0, NULL, NULL, NULL, 0, '0.0.0.0', 0, NULL, NULL);
-INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 8, 0, 0, 'Traditional_Chinese', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310129684, NULL, NULL);
+INSERT INTO `fbb_users` VALUES (2, 1, 'admin', 'c3d873d7fa9ac799e35693d4cc288d4a16ad3f96', 'comus2010mo@hotmail.com', NULL, NULL, NULL, 1, 0, 0, 1, 8, 0, 0, 'Traditional_Chinese', 1, 1309485691, NULL, NULL, 1309485691, '127.0.0.1', 1310142355, NULL, NULL);

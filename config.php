@@ -20,3 +20,14 @@ define('PUN', 1);
 
 define('PUN_DEBUG', 1);
 define('PUN_SHOW_QUERIES', 1);
+
+// Define cache directory
+define('FORUM_CACHE_DIR', PUN_ROOT.'cache/');
+
+// The maximum size of a post, in bytes, since the field is now MEDIUMTEXT this allows ~16MB but lets cap at 1MB...
+define('PUN_MAX_POSTSIZE', 1048576);
+define('PUN_SEARCH_MIN_WORD', 3);
+define('PUN_SEARCH_MAX_WORD', 20);
+define('FORUM_MAX_COOKIE_SIZE', 4048);
+
+define('PUN_DISABLE_BUFFERING', 1);

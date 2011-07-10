@@ -1,20 +1,7 @@
 <?php
 
-/**
- * Copyright (C) 2008-2011 FluxBB
- * based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * License: http://www.gnu.org/licenses/gpl.html GPL version 2 or higher
- */
-
 if (!defined('PUN_ROOT'))
 	exit('The constant PUN_ROOT must be defined and point to a valid FluxBB installation root directory.');
-
-// Define the version and database revision that this code was written for
-define('FORUM_VERSION', '1.4.5');
-
-define('FORUM_DB_REVISION', 11);
-define('FORUM_SI_REVISION', 2);
-define('FORUM_PARSER_REVISION', 2);
 
 // Block prefetch requests
 if (isset($_SERVER['HTTP_X_MOZ']) && $_SERVER['HTTP_X_MOZ'] == 'prefetch')
@@ -30,32 +17,16 @@ if (isset($_SERVER['HTTP_X_MOZ']) && $_SERVER['HTTP_X_MOZ'] == 'prefetch')
 	exit;
 }
 
-// Attempt to load the configuration file config.php
-if (file_exists(PUN_ROOT.'config.php'))
-	require PUN_ROOT.'config.php';
-
-// If we have the 1.3-legacy constant defined, define the proper 1.4 constant so we don't get an incorrect "need to install" message
-if (defined('FORUM'))
-	define('PUN', FORUM);
-
-// Load the functions script
-require PUN_ROOT.'include/functions.php';
-
-// Load UTF-8 functions
-require PUN_ROOT.'include/utf8/utf8.php';
+// Load some file
+require PUN_ROOT.'config.php'; // Attempt to load the configuration file config.php
+require PUN_ROOT.'include/functions.php'; // Load the functions script
+require PUN_ROOT.'include/utf8/utf8.php'; // Load UTF-8 functions
 
 // Strip out "bad" UTF-8 characters
 forum_remove_bad_characters();
 
 // Reverse the effect of register_globals
 forum_unregister_globals();
-
-// If PUN isn't defined, config.php is missing or corrupt
-if (!defined('PUN'))
-{
-	header('Location: install.php');
-	exit;
-}
 
 // Record the start time (will be used to calculate the generation time for the page)
 $pun_start = get_microtime();
@@ -83,14 +54,6 @@ if (get_magic_quotes_gpc())
 	$_COOKIE = stripslashes_array($_COOKIE);
 	$_REQUEST = stripslashes_array($_REQUEST);
 }
-
-// If a cookie name is not specified in config.php, we use the default (pun_cookie)
-if (empty($cookie_name))
-	$cookie_name = 'pun_cookie';
-
-// If the cache directory is not specified, we use the default setting
-if (!defined('FORUM_CACHE_DIR'))
-	define('FORUM_CACHE_DIR', PUN_ROOT.'cache/');
 
 // Define a few commonly used constants
 define('PUN_UNVERIFIED', 0);
@@ -152,15 +115,3 @@ update_users_online();
 // Check to see if we logged in without a cookie being set
 if ($pun_user['is_guest'] && isset($_GET['login']))
 	message($lang_common['No cookie']);
-
-// The maximum size of a post, in bytes, since the field is now MEDIUMTEXT this allows ~16MB but lets cap at 1MB...
-if (!defined('PUN_MAX_POSTSIZE'))
-	define('PUN_MAX_POSTSIZE', 1048576);
-
-if (!defined('PUN_SEARCH_MIN_WORD'))
-	define('PUN_SEARCH_MIN_WORD', 3);
-if (!defined('PUN_SEARCH_MAX_WORD'))
-	define('PUN_SEARCH_MAX_WORD', 20);
-
-if (!defined('FORUM_MAX_COOKIE_SIZE'))
-	define('FORUM_MAX_COOKIE_SIZE', 4048);

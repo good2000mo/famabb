@@ -22,22 +22,6 @@ require PUN_ROOT.'lang/'.$admin_language.'/admin_index.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 
-// Check for upgrade
-if ($action == 'check_upgrade')
-{
-	if (!ini_get('allow_url_fopen'))
-		message($lang_admin_index['fopen disabled message']);
-
-	$latest_version = trim(@file_get_contents('http://fluxbb.org/latest_version'));
-	if (empty($latest_version))
-		message($lang_admin_index['Upgrade check failed message']);
-
-	if (version_compare($pun_config['o_cur_version'], $latest_version, '>='))
-		message($lang_admin_index['Running latest version message']);
-	else
-		message(sprintf($lang_admin_index['New version available message'], '<a href="http://fluxbb.org/">FluxBB.org</a>'));
-}
-
 
 // Show phpinfo() output
 else if ($action == 'phpinfo' && $pun_user['g_id'] == PUN_ADMIN)
